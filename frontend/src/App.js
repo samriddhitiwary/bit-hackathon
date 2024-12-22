@@ -14,6 +14,7 @@ import FooterAppointments from './components/FooterAppointments/FooterAppointmen
 import Footer from './components/Footer/Footer';
 import Login from './components/Header/Login';
 import Profile from './components/Header/Profile';
+import FindHospital from './components/Appoinments/FindHospital';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
 
         {/* Separate page layout for Consult Online */}
         <Route path="/consult-online" element={<ConsultOnline />} />
+        <Route path="/find-hospital" element={<FindHospital />} />
+
 
         {/* Only Header is rendered for /login route */}
         <Route path="/login" element={<HeaderOnlyLayout />}>
