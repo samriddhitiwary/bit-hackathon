@@ -1,0 +1,14 @@
+.app{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    flex-wrap: wrap;
+}
+.but:hover{
+    box-shadow: 10px 10px 10px black;
+    background-color:rgb(54, 206, 206);
+}
+.but{
+    box-shadow: black;
+}

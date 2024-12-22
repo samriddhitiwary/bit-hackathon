@@ -1,0 +1,13 @@
+#navbar{
+   background-color: rgb(219, 243, 243);;
+}
+#navbar_div{
+    color: black;
+    font-weight: bold;
+    margin-left: 40%;
+}
+#navbar_text:hover{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
