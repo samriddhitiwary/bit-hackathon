@@ -3,6 +3,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './BookAppointment.css';
 import Header from '../Header/Header';
 import { Modal, Button } from 'react-bootstrap';
+import Calendar from 'react-calendar'; 
+import 'react-calendar/dist/Calendar.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const BookAppointment = () => {
   const [doctors, setDoctors] = useState([]);
@@ -15,6 +21,8 @@ const BookAppointment = () => {
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [patientName, setPatientName] = useState('');
+  const [value, onChange] = useState(new Date()); 
+  const [selectedDate, setSelectedDate] = useState(null);
   
   const images = [
     '/images/BookAppointment/img1.png',
@@ -95,11 +103,41 @@ const BookAppointment = () => {
   };
 
   const handleConfirmBooking = async () => {
-      
+    if (!selectedDoctor || !selectedDate || !selectedTime) {
+      toast.error('Please select a doctor, date, and time.');
+      return;
+    }
+  
+    try {
+      const appointmentData = {
+        patientId: JSON.parse(sessionStorage.getItem('userdata'))._id, 
+        doctorId: selectedDoctor._id,
+        date: selectedDate,
+        time: selectedTime,
+        status: 'confirmed',
+      };
+  
+      const response = await fetch('http://localhost:8000/api/appointment/scheduleApointment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        toast.success(result.msg || 'Appointment scheduled successfully!');
+        setShowModal(false);
+      } else {
+        const error = await response.json();
+        toast.error(error.msg || 'Failed to schedule the appointment.');
+      }
+    } catch (error) {
+      console.error('Error scheduling appointment:', error);
+      toast.error('An error occurred while scheduling the appointment.');
+    }
   };
-  
-
-  
 
   return (
     <>
@@ -108,8 +146,8 @@ const BookAppointment = () => {
       <div className="appointment-container">
         <h1>Book an Appointment</h1>
 
-        {/* <div className="filters">
-          <div className="filter">
+        <div className="filters-container">
+          <div className="filter-item">
             <label>Select Specialization</label>
             <select onChange={handleSpecializationChange} value={specialization}>
               <option value="">All Specializations</option>
@@ -119,7 +157,7 @@ const BookAppointment = () => {
             </select>
           </div>
 
-          <div className="filter">
+          <div className="filter-item">
             <label>Select City</label>
             <select onChange={handleCityChange} value={city}>
               <option value="">All Cities</option>
@@ -129,7 +167,7 @@ const BookAppointment = () => {
             </select>
           </div>
 
-          <div className="filter">
+          <div className="filter-item">
             <label>Search by Name</label>
             <input
               type="text"
@@ -138,40 +176,7 @@ const BookAppointment = () => {
               onChange={handleSearchChange}
             />
           </div>
-        </div> */}
-
-<div className="filters-container">
-  <div className="filter-item">
-    <label>Select Specialization</label>
-    <select onChange={handleSpecializationChange} value={specialization}>
-      <option value="">All Specializations</option>
-      {Array.from(new Set(doctors.map(doctor => doctor.specialization))).map((spec, index) => (
-        <option key={index} value={spec}>{spec}</option>
-      ))}
-    </select>
-  </div>
-
-  <div className="filter-item">
-    <label>Select City</label>
-    <select onChange={handleCityChange} value={city}>
-      <option value="">All Cities</option>
-      {Array.from(new Set(doctors.map(doctor => doctor.Location))).map((loc, index) => (
-        <option key={index} value={loc}>{loc}</option>
-      ))}
-    </select>
-  </div>
-
-  <div className="filter-item">
-    <label>Search by Name</label>
-    <input
-      type="text"
-      placeholder="Search for a doctor"
-      value={searchTerm}
-      onChange={handleSearchChange}
-    />
-  </div>
-</div>
-
+        </div>
 
         <div className="doctor-list">
           <h2>Choose a Doctor</h2>
@@ -207,24 +212,35 @@ const BookAppointment = () => {
       </div>
 
       {selectedDoctor && (
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Confirm Appointment</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered >
+        <Modal.Header closeButton>
+          <Modal.Title className="text-primary">🩺 Confirm Appointment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="mb-3">
             <p><strong>Doctor:</strong> {`${selectedDoctor.fname} ${selectedDoctor.lname}`}</p>
             <p><strong>Patient:</strong> {patientName}</p>
-            <label>Select Day:</label>
-            <select value={selectedDay} onChange={(e) => setSelectedDay(e.target.value)}>
-              <option value="">Select Day</option>
-              {selectedDoctor.schedule.map((schedule, idx) => (
-                schedule.days.map(day => (
-                  <option key={`${idx}-${day}`} value={day}>{day}</option>
-                ))
-              ))}
-            </select>
-            <label>Select Time:</label>
-            <select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)}>
+          </div>
+      
+          <div className="mb-4">
+            <label className="form-label"><strong>Select Day:</strong></label>
+            <div className="calendar-container border rounded p-2">
+              <Calendar
+                onChange={setSelectedDate}
+                value={selectedDate}
+                minDate={new Date()}
+                className="w-100"
+              />
+            </div>
+          </div>
+      
+          <div className="mb-4">
+            <label className="form-label"><strong>Select Time:</strong></label>
+            <select 
+              className="form-select" 
+              value={selectedTime} 
+              onChange={(e) => setSelectedTime(e.target.value)}
+            >
               <option value="">Select Time</option>
               {selectedDoctor.schedule.map((schedule, idx) => (
                 <option key={idx} value={`${schedule.time.startTime} - ${schedule.time.endTime}`}>
@@ -232,21 +248,33 @@ const BookAppointment = () => {
                 </option>
               ))}
             </select>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={handleConfirmBooking}>
-              Confirm Booking
-            </Button>
-          </Modal.Footer>
-        </Modal>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button 
+            variant="secondary" 
+            className="rounded-pill" 
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </Button>
+          <Button 
+            variant="primary" 
+            className="rounded-pill" 
+            onClick={handleConfirmBooking}
+          >
+            Confirm Booking
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
       )}
+
+      <ToastContainer position="top-right" autoClose={5000} />
+      
+     
     </>
   );
 };
 
 export default BookAppointment;
-
-
