@@ -1,0 +1,212 @@
+
+.appointment-container {
+    padding: 20px;
+    max-width: 1500px;
+    margin: 0 auto;
+    background: #f7f7f7; 
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.filters-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Reduce spacing between filter items */
+    flex-wrap: wrap; /* Ensure responsiveness on smaller screens */
+  }
+  
+  .filter-item {
+    display: flex;
+    flex-direction: column; 
+    gap: 8px; 
+    min-width: 150px; 
+  }
+  
+  .filter-item input[type="text"] {
+    width: 300px; 
+    padding: 8px; /* Add padding for better usability */
+    font-size: 16px; /* Increase font size */
+    border: 1px solid #ccc; /* Optional: Add border styling */
+    border-radius: 4px; /* Optional: Add rounded corners */
+  }
+  
+
+
+.doctor-list {
+    margin-top: 20px;
+}
+
+.doctor-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.doctor-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    text-align: left;
+    background-image: linear-gradient(45deg, #f9f9f9, #ffffff);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+
+.doctor-card:hover {
+    background-image: linear-gradient(45deg, #a2c2f1, #d0e3f1); 
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+.doctor-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    margin-bottom: 15px;
+}
+
+.book-appointment-btn {
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #007291, #07394a);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-left: auto; 
+    margin-top: -10%;
+}
+.book-appointment-btn:hover {
+    background: linear-gradient(45deg, #0056b3, #3388cc);
+    transform: scale(1.05);
+}
+
+.doctor-schedule {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 14px;
+    
+}
+
+.doctor-schedule h4 {
+    margin-bottom: 10px;
+    color: #007bff; 
+}
+
+.doctor-schedule ul {
+    list-style-type: none; 
+    padding: 0;
+}
+
+.doctor-schedule li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.doctor-schedule li i {
+    margin-right: 8px;
+    color: #007bff;
+    font-size: 18px; 
+}
+
+@media (min-width: 768px) {
+    .doctor-grid {
+        grid-template-columns: 1fr 1fr; 
+    }
+}
+
+@media (max-width: 768px) {
+    .doctor-grid {
+        grid-template-columns: 1fr; 
+    }
+}
+
+
+@media (max-width: 768px) {
+    .filters-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px; 
+    }
+  
+    .filter-item input[type="text"] {
+      width: 100%; 
+    }
+  }
+
+.appointment-form {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.appointment-form input,
+.appointment-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.appointment-form input:focus,
+.appointment-form select:focus {
+    border-color: #b6d4f4;
+    outline: none;
+}
+
+.appointment-form button {
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #97c2f1, #f2f3f4); 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.appointment-form button:hover {
+    background: linear-gradient(45deg, #91c2f6, #f2f5f8); 
+    transform: scale(1.05); 
+}
+
+.degree-availability-line {
+    height: 2px;
+    background: linear-gradient(to right, #0b131a, transparent 95%);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.degree-availability-line {
+    height: 2px;
+    background: linear-gradient(to right, #0b131a, transparent 95%); 
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%; 
+}

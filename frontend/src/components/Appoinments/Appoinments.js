@@ -12,7 +12,7 @@ const Appointments = () => {
     <div className="app">
       <br />
 
-      <Button className="but" variant="light">
+      <Button className="but" variant="light"  onClick={() => navigate("/book-appointment")}>
         <img src="images/Appointments/img1.svg" alt="Book Appointment" />
         <p>Book Appointment</p>
       </Button>

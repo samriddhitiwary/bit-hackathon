@@ -16,6 +16,8 @@ import Login from './components/Header/Login';
 import Profile from './components/Header/Profile';
 import FindHospital from './components/Appoinments/FindHospital';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import BookAppointment from './components/Appoinments/BookAppointment';
 
 function App() {
   useEffect(() => {
@@ -41,6 +43,7 @@ function App() {
         {/* Separate page layout for Consult Online */}
         <Route path="/consult-online" element={<ConsultOnline />} />
         <Route path="/find-hospital" element={<FindHospital />} />
+        <Route path='/book-appointment' element={<BookAppointment/>}></Route>
 
 
         {/* Only Header is rendered for /login route */}
@@ -75,6 +78,7 @@ const ProfileOnlyLayout = () => (
     <Outlet /> 
   </>
 );
+
 
 
 const HeaderOnlyLayout = () => (
