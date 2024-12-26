@@ -35,16 +35,17 @@ const DoctorSchema = new mongoose.Schema({
           required: true,
         },
       },
-    },
+    },,
   ],
   Degree: {
     type: String,
-    required: true,
+    required: true
   },
   Location: {
     type: String,
     required: true,
   },
+  
 });
 
 export default mongoose.model("DoctorProfile", DoctorSchema);

@@ -18,6 +18,7 @@ import FindHospital from './components/Appoinments/FindHospital';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BookAppointment from './components/Appoinments/BookAppointment';
+import ViewAppointments from './components/Appoinments/ViewAppointments';
 
 function App() {
   useEffect(() => {
@@ -44,6 +45,8 @@ function App() {
         <Route path="/consult-online" element={<ConsultOnline />} />
         <Route path="/find-hospital" element={<FindHospital />} />
         <Route path='/book-appointment' element={<BookAppointment/>}></Route>
+        <Route path='/view-appointment' element={<ViewAppointments/>}></Route>
+        
 
 
         {/* Only Header is rendered for /login route */}

@@ -7,6 +7,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MiniNavbar from './MiniNavbar';
 
 
 
@@ -143,6 +144,7 @@ const BookAppointment = () => {
     <>
       <Header />
       <br />
+      <MiniNavbar/>
       <div className="appointment-container">
         <h1>Book an Appointment</h1>
 

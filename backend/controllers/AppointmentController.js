@@ -64,7 +64,7 @@ export const cancelAppointment = async (req, res) => {
 
         const updatedData = await Appointment.findByIdAndUpdate(
             id,
-            {  status: false } , 
+            {  status: cancelled } , 
             { new: true } 
         );
 
@@ -75,11 +75,16 @@ export const cancelAppointment = async (req, res) => {
 };
 
 
+
 export const getAllAppointmentsOfOnePatient = async (req, res) => {
     try {
         const patientId = req.params.id;
 
-        const appointments = await Appointment.find({ patientId });
+        const appointments = await Appointment.find({ patientId })
+            .populate({
+                path: 'doctorId',
+                select: 'fname lname photo', 
+            });
 
         if (appointments.length === 0) {
             return res.status(404).json({ msg: "No appointments found for this patient" });
@@ -90,5 +95,3 @@ export const getAllAppointmentsOfOnePatient = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-
-

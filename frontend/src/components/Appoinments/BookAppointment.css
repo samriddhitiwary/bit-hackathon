@@ -1,7 +1,7 @@
 
 .appointment-container {
     padding: 20px;
-    max-width: 1500px;
+    max-width: 1400px;
     margin: 0 auto;
     background: #f7f7f7; 
     border-radius: 10px;
@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px; /* Reduce spacing between filter items */
+    gap: 10px; 
     flex-wrap: wrap; /* Ensure responsiveness on smaller screens */
   }
   
