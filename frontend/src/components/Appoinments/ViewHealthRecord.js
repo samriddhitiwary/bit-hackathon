@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,109 +13,97 @@ import { Line } from 'react-chartjs-2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
-import { FaHeartbeat, FaWeightHanging, FaTint } from 'react-icons/fa'; // Icons
+import { FaHeartbeat, FaWeightHanging, FaTint } from 'react-icons/fa';
 import Header from '../Header/Header';
-import { ToastContainer, toast } from 'react-toastify'; 
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ViewHealthRecord.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const ViewHealthRecord = () => {
-  const [bpData, setBpData] = useState([]);
-  const [sugarData, setSugarData] = useState([]);
-  const [weightData, setWeightData] = useState([]);
   const [date, setDate] = useState(new Date());
   const [bpValue, setBpValue] = useState('');
+  const [bpData, setBpData] = useState([]);
   const [sugarValue, setSugarValue] = useState('');
+  const [sugarData, setSugarData] = useState([]);
   const [weightValue, setWeightValue] = useState('');
+  const [weightData, setWeightData] = useState([]);
 
   const userData = JSON.parse(sessionStorage.getItem('userdata'));
   const patientId = userData ? userData._id : null;
 
-  const handleBloodPressureData = async () => {
-    if (!patientId) {
-      toast.error('No patient ID found!');
-      return;
+  useEffect(() => {
+    if (patientId) {
+      fetchInitialData();
     }
+  }, [patientId]);
 
+  const fetchInitialData = async () => {
     try {
-      await axios.post('http://localhost:8000/api/healthrecord/getValueforBP', {
-        date,
-        bloodPressure: bpValue,
-        patientId,
-      });
+      const bpResponse = await axios.get(
+        `http://localhost:8000/api/healthrecord/getAllBPRecordsbyId/${patientId}`
+      );
+      setBpData(
+        bpResponse.data.slice(-5).map((record) => ({
+          date: new Date(record.date).toLocaleDateString(),
+          value: record.bloodPressure,
+        }))
+      );
 
-      setBpData((prevData) => [
-        ...prevData,
-        { date: date.toLocaleDateString(), value: bpValue },
-      ]);
+      const sugarResponse = await axios.get(
+        `http://localhost:8000/api/healthrecord/getAll_SugarLevel_RecordsbyId/${patientId}`
+      );
+      setSugarData(
+        sugarResponse.data.slice(-5).map((record) => ({
+          date: new Date(record.date).toLocaleDateString(),
+          value: record.sugarlevel,
+        }))
+      );
 
-      toast.success('Blood Pressure data recorded successfully!');
+      const weightResponse = await axios.get(
+        `http://localhost:8000/api/healthrecord/getAll_WeightLevel_RecordsbyId/${patientId}`
+      );
+      setWeightData(
+        weightResponse.data.slice(-5).map((record) => ({
+          date: new Date(record.date).toLocaleDateString(),
+          value: record.weight,
+        }))
+      );
     } catch (error) {
       console.error(error);
-      toast.error('Failed to record Blood Pressure data');
+      toast.error('Failed to fetch initial data');
     }
   };
 
-  const handleSugarLevelData = async () => {
+  const handleSubmission = async (api, value, setValue, data, setData, label) => {
     if (!patientId) {
       toast.error('No patient ID found!');
       return;
     }
 
     try {
-      await axios.post('http://localhost:8000/api/healthrecord/getValueforSugarLevel', {
-        date,
-        sugarlevel: sugarValue,
-        patientId,
-      });
+      await axios.post(api, { date, [label]: value, patientId });
 
-      setSugarData((prevData) => [
-        ...prevData,
-        { date: date.toLocaleDateString(), value: sugarValue },
-      ]);
+      const newRecord = { date: date.toLocaleDateString(), value };
+      const updatedData = [...data, newRecord].slice(-5);
 
-      toast.success('Sugar Level data recorded successfully!');
+      setData(updatedData);
+      toast.success(`${label} data recorded successfully!`);
     } catch (error) {
       console.error(error);
-      toast.error('Failed to record Sugar Level data');
-    }
-  };
-
-  const handleWeightData = async () => {
-    if (!patientId) {
-      toast.error('No patient ID found!');
-      return;
-    }
-
-    try {
-      await axios.post('http://localhost:8000/api/healthrecord/getValueforWeight', {
-        date,
-        weight: weightValue,
-        patientId,
-      });
-
-      setWeightData((prevData) => [
-        ...prevData,
-        { date: date.toLocaleDateString(), value: weightValue },
-      ]);
-
-      toast.success('Weight data recorded successfully!');
-    } catch (error) {
-      console.error(error);
-      toast.error('Failed to record Weight data');
+      toast.error(`Failed to record ${label} data`);
     }
   };
 
   const generateChartData = (label, data, color) => ({
-    labels: data.map((entry) => entry.date), 
+    labels: data.map((entry) => entry.date),
     datasets: [
       {
         label,
-        data: data.map((entry) => entry.value), 
-        borderColor: color, // Use dynamic color for each graph
-        backgroundColor: `${color}33`, // Lighter color for background
+        data: data.map((entry) => entry.value),
+        borderColor: color,
+        backgroundColor: `${color}33`,
         borderWidth: 2,
       },
     ],
@@ -127,23 +115,46 @@ const ViewHealthRecord = () => {
       <br />
       <div className="container">
         <div className="card">
-          <FaHeartbeat className="icon" />
-          <Line data={generateChartData('Blood Pressure', bpData, 'rgba(255, 99, 132, 1)')} className="line-chart" />
+          <div className="icon-wrapper">
+            <FaHeartbeat className="icon" />
+          </div>
+          <Line
+            data={generateChartData('Blood Pressure', bpData, 'rgba(255, 99, 132, 1)')}
+            className="line-chart"
+          />
           <div className="datepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
           </div>
           <input
             type="number"
-            placeholder="Enter BP Value"
+            placeholder="Enter Blood Pressure"
             value={bpValue}
             onChange={(e) => setBpValue(e.target.value)}
           />
-          <button onClick={handleBloodPressureData}>Record BP Data</button>
+          <button
+            onClick={() =>
+              handleSubmission(
+                'http://localhost:8000/api/healthrecord/getValueforBP',
+                bpValue,
+                setBpValue,
+                bpData,
+                setBpData,
+                'bloodPressure'
+              )
+            }
+          >
+            Record Blood Pressure
+          </button>
         </div>
 
         <div className="card">
-          <FaTint className="icon" />
-          <Line data={generateChartData('Sugar Level', sugarData, 'rgba(54, 162, 235, 1)')} className="line-chart" />
+          <div className="icon-wrapper">
+            <FaTint className="icon" />
+          </div>
+          <Line
+            data={generateChartData('Sugar Level', sugarData, 'rgba(54, 162, 235, 1)')}
+            className="line-chart"
+          />
           <div className="datepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
           </div>
@@ -153,12 +164,30 @@ const ViewHealthRecord = () => {
             value={sugarValue}
             onChange={(e) => setSugarValue(e.target.value)}
           />
-          <button onClick={handleSugarLevelData}>Record Sugar Level</button>
+          <button
+            onClick={() =>
+              handleSubmission(
+                'http://localhost:8000/api/healthrecord/getValueforSugarLevel',
+                sugarValue,
+                setSugarValue,
+                sugarData,
+                setSugarData,
+                'sugarlevel'
+              )
+            }
+          >
+            Record Sugar Level
+          </button>
         </div>
 
         <div className="card">
-          <FaWeightHanging className="icon" />
-          <Line data={generateChartData('Weight', weightData, 'rgba(75, 192, 192, 1)')} className="line-chart" />
+          <div className="icon-wrapper">
+            <FaWeightHanging className="icon" />
+          </div>
+          <Line
+            data={generateChartData('Weight', weightData, 'rgba(75, 192, 192, 1)')}
+            className="line-chart"
+          />
           <div className="datepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
           </div>
@@ -168,10 +197,22 @@ const ViewHealthRecord = () => {
             value={weightValue}
             onChange={(e) => setWeightValue(e.target.value)}
           />
-          <button onClick={handleWeightData}>Record Weight</button>
+          <button
+            onClick={() =>
+              handleSubmission(
+                'http://localhost:8000/api/healthrecord/getValueforWeight',
+                weightValue,
+                setWeightValue,
+                weightData,
+                setWeightData,
+                'weight'
+              )
+            }
+          >
+            Record Weight
+          </button>
         </div>
       </div>
-
       <ToastContainer />
     </div>
   );

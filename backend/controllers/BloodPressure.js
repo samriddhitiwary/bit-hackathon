@@ -19,3 +19,14 @@ export const getValueforBP = async(req, res)=>{
     }
 }
 
+
+export const getAllBPRecordsbyId = async (req, res) => {
+    try {
+        const id = req.params.id; 
+        const AllBPRecordList = await BloodPressure.find({ patientId: id }).sort({ date: -1 }).limit(5);
+        
+        res.status(200).json(AllBPRecordList); 
+    } catch (error) {
+        res.status(500).json({ error: error.message }); 
+    }
+};

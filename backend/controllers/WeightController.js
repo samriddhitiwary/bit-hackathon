@@ -19,3 +19,18 @@ export const getValueforWeight = async(req, res)=>{
     }
 }
 
+
+
+
+
+export const getAll_WeightLevel_RecordsbyId = async (req, res) => {
+    try {
+        const id = req.params.id; 
+        const AllWeightLevelList = await Weight.find({ patientId: id }).sort({ date: -1 }).limit(5);
+        
+        res.status(200).json(AllWeightLevelList); 
+    } catch (error) {
+        res.status(500).json({ error: error.message }); 
+    }
+};
+
