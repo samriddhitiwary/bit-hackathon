@@ -13,10 +13,11 @@ import { Line } from 'react-chartjs-2';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
+import { FaHeartbeat, FaWeightHanging, FaTint } from 'react-icons/fa'; // Icons
 import Header from '../Header/Header';
 import { ToastContainer, toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
-
+import './ViewHealthRecord.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -45,7 +46,6 @@ const ViewHealthRecord = () => {
         patientId,
       });
 
-      
       setBpData((prevData) => [
         ...prevData,
         { date: date.toLocaleDateString(), value: bpValue },
@@ -71,7 +71,6 @@ const ViewHealthRecord = () => {
         patientId,
       });
 
-      
       setSugarData((prevData) => [
         ...prevData,
         { date: date.toLocaleDateString(), value: sugarValue },
@@ -109,14 +108,14 @@ const ViewHealthRecord = () => {
     }
   };
 
-  const generateChartData = (label, data) => ({
+  const generateChartData = (label, data, color) => ({
     labels: data.map((entry) => entry.date), 
     datasets: [
       {
         label,
         data: data.map((entry) => entry.value), 
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(0, 6, 6, 0.2)',
+        borderColor: color, // Use dynamic color for each graph
+        backgroundColor: `${color}33`, // Lighter color for background
         borderWidth: 2,
       },
     ],
@@ -126,59 +125,56 @@ const ViewHealthRecord = () => {
     <div>
       <Header />
       <br />
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-       
-        <div>
-          <Line data={generateChartData('Blood Pressure', bpData)} />
-          <div>
+      <div className="container">
+        <div className="card">
+          <FaHeartbeat className="icon" />
+          <Line data={generateChartData('Blood Pressure', bpData, 'rgba(255, 99, 132, 1)')} className="line-chart" />
+          <div className="datepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
-            <input
-              type="number"
-              placeholder="Enter BP Value"
-              value={bpValue}
-              onChange={(e) => setBpValue(e.target.value)}
-            />
-            <button onClick={handleBloodPressureData}>Record BP Data</button>
           </div>
+          <input
+            type="number"
+            placeholder="Enter BP Value"
+            value={bpValue}
+            onChange={(e) => setBpValue(e.target.value)}
+          />
+          <button onClick={handleBloodPressureData}>Record BP Data</button>
         </div>
 
-        
-        <div>
-          <Line data={generateChartData('Sugar Level', sugarData)} />
-          <div>
+        <div className="card">
+          <FaTint className="icon" />
+          <Line data={generateChartData('Sugar Level', sugarData, 'rgba(54, 162, 235, 1)')} className="line-chart" />
+          <div className="datepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
-            <input
-              type="number"
-              placeholder="Enter Sugar Level"
-              value={sugarValue}
-              onChange={(e) => setSugarValue(e.target.value)}
-            />
-            <button onClick={handleSugarLevelData}>Record Sugar Level</button>
           </div>
+          <input
+            type="number"
+            placeholder="Enter Sugar Level"
+            value={sugarValue}
+            onChange={(e) => setSugarValue(e.target.value)}
+          />
+          <button onClick={handleSugarLevelData}>Record Sugar Level</button>
         </div>
 
-        
-        <div>
-          <Line data={generateChartData('Weight', weightData)} />
-          <div>
+        <div className="card">
+          <FaWeightHanging className="icon" />
+          <Line data={generateChartData('Weight', weightData, 'rgba(75, 192, 192, 1)')} className="line-chart" />
+          <div className="datepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
-            <input
-              type="number"
-              placeholder="Enter Weight"
-              value={weightValue}
-              onChange={(e) => setWeightValue(e.target.value)}
-            />
-            <button onClick={handleWeightData}>Record Weight</button>
           </div>
+          <input
+            type="number"
+            placeholder="Enter Weight"
+            value={weightValue}
+            onChange={(e) => setWeightValue(e.target.value)}
+          />
+          <button onClick={handleWeightData}>Record Weight</button>
         </div>
       </div>
 
-      
       <ToastContainer />
     </div>
   );
 };
 
 export default ViewHealthRecord;
-
-
