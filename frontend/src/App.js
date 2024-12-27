@@ -19,6 +19,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BookAppointment from './components/Appoinments/BookAppointment';
 import ViewAppointments from './components/Appoinments/ViewAppointments';
+import VViewHealthRecord from './components/Appoinments/ViewHealthRecord';
+import ViewHealthRecord from './components/Appoinments/ViewHealthRecord';
 
 function App() {
   useEffect(() => {
@@ -46,6 +48,7 @@ function App() {
         <Route path="/find-hospital" element={<FindHospital />} />
         <Route path='/book-appointment' element={<BookAppointment/>}></Route>
         <Route path='/view-appointment' element={<ViewAppointments/>}></Route>
+        <Route path='/view-health-record' element={<ViewHealthRecord/>}></Route>
         
 
 

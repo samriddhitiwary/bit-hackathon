@@ -56,7 +56,6 @@ export const cancelAppointment = async (req, res) => {
     try {
         const id = req.params.id;
 
-       
         const AppointmentExist = await Appointment.findById(id);
         if (!AppointmentExist) {
             return res.status(404).json({ msg: "Appointment not found" });
@@ -64,12 +63,13 @@ export const cancelAppointment = async (req, res) => {
 
         const updatedData = await Appointment.findByIdAndUpdate(
             id,
-            {  status: cancelled } , 
+            {  status: 'cancelled' } , 
             { new: true } 
         );
 
         res.status(200).json({ msg: "Appointment canceled successfully", updatedData });
     } catch (error) {
+        console.log('PANKAJ ', error)
         res.status(500).json({ error: error.message });
     }
 };

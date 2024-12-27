@@ -204,7 +204,7 @@ const BookAppointment = () => {
                   </ul>
                 </div>
 
-                <button onClick={() => handleSelectDoctor(doctor)} className="book-appointment-btn">
+                <button onClick={() => handleSelectDoctor(doctor)} className="Patient-book-appointment-btn">
                   Book Appointment
                 </button>
               </li>

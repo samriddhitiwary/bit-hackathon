@@ -6,6 +6,9 @@ import cors from "cors";
 import userRoute from "./routes/ProfileRoute.js";
 import doctorRoute from "./routes/DoctorRoute.js";
 import AppointmentRouter from "./routes/AppointmentRoute.js";
+import getValueforBPRouter from "./routes/BloodPressure.js";
+import getValueforSugarLevelRouter from "./routes/SugarLevelRoute.js";
+import getValueforWeightRouter from "./routes/WeightRouter.js";
 
 const app = express();
 dotenv.config();
@@ -33,3 +36,6 @@ mongoose
 app.use("/api/user", userRoute);
 app.use("/api/doctor", doctorRoute);
 app.use("/api/appointment",AppointmentRouter);
+app.use("/api/healthrecord",getValueforBPRouter);
+app.use("/api/healthrecord",getValueforSugarLevelRouter);
+app.use("/api/healthrecord",getValueforWeightRouter);

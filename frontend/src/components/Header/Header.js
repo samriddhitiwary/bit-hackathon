@@ -37,14 +37,16 @@ const Header = () => {
     <header>
       <div className='header'>
         <p className='wordsInHeader'>
-          <img src='images/Header/img1.png' alt="Header" />
+          <img src='images/Header/img1.png' alt="Header"  />
           Privacy Policy | Disclaimer | Contact
         </p>
       </div>
 
       <div className='headerFlexBox'>
         <div>
+          <a href='/'>
           <img className='img' src='images/Header/logo.jpeg' alt='Logo' />
+          </a>
         </div>
 
         <div className='search'>

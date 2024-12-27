@@ -12,7 +12,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px; 
-    flex-wrap: wrap; /* Ensure responsiveness on smaller screens */
+    flex-wrap: wrap; 
   }
   
   .filter-item {
@@ -24,10 +24,9 @@
   
   .filter-item input[type="text"] {
     width: 300px; 
-    padding: 8px; /* Add padding for better usability */
-    font-size: 16px; /* Increase font size */
-    border: 1px solid #ccc; /* Optional: Add border styling */
-    border-radius: 4px; /* Optional: Add rounded corners */
+    padding: 8px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
   }
   
 
@@ -76,7 +75,7 @@
     margin-bottom: 15px;
 }
 
-.book-appointment-btn {
+.Patient-book-appointment-btn {
     padding: 12px 25px;
     background: linear-gradient(45deg, #007291, #07394a);
     color: white;
@@ -89,7 +88,7 @@
     margin-left: auto; 
     margin-top: -10%;
 }
-.book-appointment-btn:hover {
+.Patient-book-appointment-btn:hover {
     background: linear-gradient(45deg, #0056b3, #3388cc);
     transform: scale(1.05);
 }

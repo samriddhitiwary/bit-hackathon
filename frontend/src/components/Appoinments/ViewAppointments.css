@@ -104,7 +104,7 @@ ul {
   transform: translateY(-2px);
 }
 
-/* Available Times Section */
+
 .available-times ul {
   display: flex;
   flex-wrap: wrap;
@@ -155,7 +155,6 @@ ul {
   }
 }
 
-/* Grid layout for Appointment Items */
 ul {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two columns */

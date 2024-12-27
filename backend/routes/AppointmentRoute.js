@@ -5,7 +5,7 @@ const AppointmentRouter = express.Router();
 
 AppointmentRouter.post("/scheduleApointment",scheduleApointment);
 AppointmentRouter.put("/updateAppointment/:id",updateAppointment);
-AppointmentRouter.delete("/cancelAppointment/:id",cancelAppointment);
+AppointmentRouter.put("/cancelAppointment/:id",cancelAppointment);
 AppointmentRouter.get("/getAllAppointmentsOfOnePatient/:id",getAllAppointmentsOfOnePatient);
 
 export default AppointmentRouter;

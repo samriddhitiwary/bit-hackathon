@@ -7,7 +7,7 @@ function ClinicCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src='images/carousel/image1.jpg'
+          src='images/carousel/imag1.jpg'
           alt="First slide"
           style={{ objectFit: 'content', maxHeight: '30rem' }}
         />
@@ -54,14 +54,6 @@ function ClinicCarousel() {
 
 
 
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src='images/carousel/img6.jpg'
-          alt="Third slide"
-          style={{ objectFit: 'cover', maxHeight: '30rem' }}
-        />
-      </Carousel.Item>
 
       <Carousel.Item>
         <img
