@@ -33,6 +33,7 @@
     "react-jitsi": "^1.0.4",
     "react-modal": "^3.16.3",
     "react-pdf": "^9.2.1",
+    "react-pdf-scroll": "^1.0.0",
     "react-scripts": "5.0.1",
     "react-toast": "^1.0.3",
     "react-toastify": "^11.0.2",
