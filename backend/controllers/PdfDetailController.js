@@ -4,7 +4,7 @@ import fs from 'fs';
 
 export const createPDF = async (req, res) => {
     try {
-        const { patientId, hospitalName, doctorName } = req.body;
+        const { patientId, hospitalName, doctorName, date } = req.body;
         if (!req.file) {
             return res.status(400).json({ message: "PDF file is required" });
         }
@@ -15,6 +15,7 @@ export const createPDF = async (req, res) => {
             patientId,
             hospitalName,
             doctorName,
+            date,
             pdf: req.file,
         });
 

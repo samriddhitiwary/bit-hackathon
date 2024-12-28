@@ -21,8 +21,11 @@ import './ViewHealthRecord.css';
 import { pdfjs } from "react-pdf";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './ViewAppointments.css';
+import { FaUserMd, FaCalendarAlt } from 'react-icons/fa';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
 
 const ViewHealthRecord = () => {
   const [date, setDate] = useState(new Date());
@@ -42,6 +45,7 @@ const ViewHealthRecord = () => {
     date: '',
     file: null,
   });
+  const [allPrescription, setAllPrescription] = useState([]);
 
   const [viewDetails, setViewDetails] = useState(null);
   const userData = JSON.parse(sessionStorage.getItem('userdata'));
@@ -52,6 +56,24 @@ const ViewHealthRecord = () => {
       fetchInitialData();
     }
   }, [patientId]);
+
+useEffect(() => {
+    const fetchPrescriptions = async () => {
+      try {
+        const userData = JSON.parse(sessionStorage.getItem('userdata'));
+        const response = await fetch(
+          `http://localhost:8000/api/pdfdetails/getPDFsByPatientId/${userData._id}`
+        );
+        const data = await response.json();
+        setAllPrescription(data);
+        
+      } catch (error) {
+        console.error('Error fetching Prescriptions:', error);
+      }
+    };
+
+    fetchPrescriptions();
+  }, []);
 
   const fetchInitialData = async () => {
     try {
@@ -133,8 +155,34 @@ const ViewHealthRecord = () => {
   };
 
   const handleSubmit = () => {
-    setViewDetails(formData);
+    const myFormData = new FormData();
+    
     setShowModal(false);
+
+      
+    myFormData.append('patientId', patientId);
+    myFormData.append('hospitalName', formData.hospitalName);
+    myFormData.append('doctorName', formData.doctorName );
+    myFormData.append('date', formData.date);
+    myFormData.append('file', formData.file);
+   
+
+    if (!formData.hospitalName || !formData.doctorName || !formData.date) {
+      toast.error('Please enter a doctor, Hosptal, and time.');
+      return;
+    }
+         
+
+        const config = {headers: {'Content-Type': 'multipart/form-data'}}
+
+        try{
+            const data =  axios.post('http://localhost:8000/api/pdfdetails/create', myFormData, config)
+            console.log(data);
+        }
+        catch(err) {
+            console.log(err);
+        }
+        
   };
 
   const handleCloseModal = () =>{
@@ -145,9 +193,8 @@ const ViewHealthRecord = () => {
     setShowModal(true);
   };
 
-  const handlePdfUpload = () =>{
-    
-  }
+  
+
 
   return (
     <>
@@ -322,15 +369,35 @@ const ViewHealthRecord = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* View Details Section */}
-      {viewDetails && (
-        <div className="mt-4">
-          <h5>Uploaded Prescription Details:</h5>
-          <p><strong>Hospital Name:</strong> {viewDetails.hospitalName}</p>
-          <p><strong>Doctor Name:</strong> {viewDetails.doctorName}</p>
-          <p><strong>Date:</strong> {viewDetails.date}</p>
-          <p><strong>Uploaded File:</strong> {viewDetails.file?.name}</p>
-        </div>
+     
+      {allPrescription.length > 0 ? (
+        <ul>
+          {allPrescription.map((Prescription) => (
+            <li key={Prescription._id} className="ViewAppointments-appointment-item">
+              <div className="ViewAppointments-doctor-info">
+                <img src="/images/BookAppointment/doctor.jpg" alt="Doctor" />
+                <div className="ViewAppointments-appointment-details">
+                <p><FaUserMd /> <strong>Hospital Name:</strong> {Prescription.hospitalName}</p>
+                  <p><FaUserMd /> <strong>Doctor:</strong> {Prescription.doctorName}</p>
+                  <p><FaCalendarAlt /> <strong>Date:</strong> {new Date(Prescription.date).toLocaleDateString()}</p>
+                  <p><FaUserMd /> <strong>PDF Link:</strong> {Prescription.file}</p>
+                </div>
+              </div>
+              <div className="ViewAppointments_appointment-actions">
+        {/* <button className="appointment-button" onClick={() => updateAppointment(appointment._id)}>
+          <FaEdit /> Update
+        </button>
+        <button className="appointment-button" onClick={() => cancelAppointment(appointment._id)}>
+          <FaTrash /> Cancel */}
+        {/* </button> */}
+      </div>
+      
+      
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No active appointments.</p>
       )}
     </div>
    
