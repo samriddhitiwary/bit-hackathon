@@ -295,7 +295,7 @@ const ViewHealthRecord = () => {
   
   <div>
       
-      <Button onClick={handleOpenModal}>Upload Prescription</Button>
+      <Button onClick={handleOpenModal} style={{'marginLeft':"40%"}}>Upload Prescription</Button>
 
      
       <Modal show={showModal} onHide={handleCloseModal}>
