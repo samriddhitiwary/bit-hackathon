@@ -9,8 +9,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ToastContainer from 'react-toast';
 import { toast } from 'react-toast';
-// import './Profile.css';
-import moment from 'moment';
 
 const Profile = () => {
   const initialUser = {
@@ -33,9 +31,6 @@ const Profile = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const dateFromDateString = (dateString) => {
-    return moment(new Date(dateString)).format('YYYY-MM-DD');
-  };
   
   const submitForm = async (e) => {
     e.preventDefault();
@@ -71,8 +66,6 @@ const Profile = () => {
           `http://localhost:8000/api/user/getuserbyemail?email=${email}`
         );
         if (response.data) {
-          const dob = dateFromDateString(response.data.dob);
-          response.data.dob = dob;
           setUser(response.data);
           setIsExistingUser(true);
           sessionStorage.setItem('userdata', JSON.stringify(response.data))
@@ -106,7 +99,7 @@ const Profile = () => {
   }
 
   return (
-    <Container className="mt-5 d-flex justify-content-evenly flex-column">
+    <Container className="mt-5">
       <h2 className="text-center mb-4">Welcome, {firebaseUser.displayName}</h2>
       <div className="text-center mb-4">
         <img
@@ -116,16 +109,16 @@ const Profile = () => {
           style={{ width: '150px', height: '150px' }}
         />
       </div>
-      <div className="text-center mb-4">Email: {firebaseUser.email}</div>
-      {/* <div className="d-flex justify-content-center mb-4">
+      <p className="text-center mb-4">Email: {firebaseUser.email}</p>
+      <div className="d-flex justify-content-center mb-4">
         <Button onClick={handleLogout} variant="danger" className="btn-3d">
           Logout
         </Button>
-      </div> */}
+      </div>
 
-      {/* <h3 className="mb-4 text-center">
+      <h3 className="mb-4 text-center">
         {isExistingUser ? 'Update Your Profile' : 'Create Your Profile'}
-      </h3> */}
+      </h3>
       <Form onSubmit={submitForm}>
         <Row className="mb-3">
           <Col md={6}>

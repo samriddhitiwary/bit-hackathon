@@ -9,6 +9,7 @@ import AppointmentRouter from "./routes/AppointmentRoute.js";
 import getValueforBPRouter from "./routes/BloodPressure.js";
 import getValueforSugarLevelRouter from "./routes/SugarLevelRoute.js";
 import getValueforWeightRouter from "./routes/WeightRouter.js";
+import getPDFrouter from "./routes/PdfRoute.js";
 
 const app = express();
 dotenv.config();
@@ -39,3 +40,4 @@ app.use("/api/appointment",AppointmentRouter);
 app.use("/api/healthrecord",getValueforBPRouter);
 app.use("/api/healthrecord",getValueforSugarLevelRouter);
 app.use("/api/healthrecord",getValueforWeightRouter);
+app.use("/api/pdfdetails", getPDFrouter);

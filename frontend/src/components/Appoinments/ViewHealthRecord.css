@@ -7,7 +7,7 @@
     flex-wrap: wrap; 
   }
   
-  .card {
+  .ViewHealthRecordcard {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,10 +21,10 @@
     justify-content: center; 
   }
   
-  .card:hover {
+  .ViewHealthRecordcard:hover {
     transform: translateY(-10px);
   }
-  .card input {
+  .ViewHealthRecordcard input {
     width: 50%;
     padding: 10px;
     margin: 10px 0;
@@ -33,7 +33,7 @@
     font-size: 14px;
   }
   
-  .card button {
+  .ViewHealthRecordcard button {
     padding: 10px 15px;
     background: linear-gradient(45deg, #007291, #07394a);
     color: white;
@@ -45,22 +45,22 @@
   }
   
   
-  .card button:hover {
+  .ViewHealthRecordcard button:hover {
     background-color: #0056b3;
   }
   
   
-  .card .datepicker-wrapper {
+  .ViewHealthRecordcard .ViewHealthRecorddatepicker-wrapper {
     margin: 10px 0;
   }
   
   
-  .card .datepicker-wrapper input {
+  .ViewHealthRecordcard .ViewHealthRecorddatepicker-wrapper input {
     cursor: pointer;
   }
   
   
-  .card .icon {
+  .ViewHealthRecordcard .ViewHealthRecordicon {
     font-size: 40px;
     color: #007bff;
     margin-bottom: 10px;
@@ -80,23 +80,23 @@
       align-items: center; 
     }
   
-    .card {
+    .ViewHealthRecordcard {
       width: 90%; 
       margin-bottom: 20px; 
     }
   
     
-    .card .icon {
+    .ViewHealthRecordcard .ViewHealthRecordicon {
       font-size: 30px;
     }
   
    
-    .card input {
+    .ViewHealthRecordcard input {
       width: 100%;
       font-size: 14px;
     }
   
-    .card button {
+    .ViewHealthRecordcard button {
       font-size: 14px;
     }
   
@@ -109,15 +109,15 @@
   
   
   @media (max-width: 480px) {
-    .card input {
+    .ViewHealthRecordcard input {
       font-size: 12px;
     }
   
-    .card button {
+    .ViewHealthRecordcard button {
       font-size: 12px;
     }
   
-    .card .icon {
+    .ViewHealthRecordcard .ViewHealthRecordicon {
       font-size: 25px;
     }
   
@@ -125,4 +125,132 @@
       height: 200px; 
     }
   }
+  
+/* Container for the PDF section */
+.pdf-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.pdf-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.pdf-upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Custom button for file upload */
+.custom-upload-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-upload-button:hover {
+  background-color: #45a049;
+}
+
+.custom-upload-button i {
+  margin-right: 8px;
+}
+
+/* Hidden file input */
+.hidden-input {
+  display: none;
+}
+
+/* Upload button style */
+.upload-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3;
+}
+
+/* PDF list section */
+.pdf-list {
+  margin-top: 40px;
+}
+
+/* No PDFs available text */
+.no-pdf-text {
+  text-align: center;
+  color: #777;
+  font-size: 1.1rem;
+}
+
+.pdf-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pdf-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.pdf-item:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-link {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.pdf-link:hover {
+  text-decoration: underline;
+}
+
+.pdf-link i {
+  margin-right: 8px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.delete-button:hover {
+  color: #c0392b;
+}
+
+
   

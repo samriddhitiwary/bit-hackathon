@@ -18,6 +18,9 @@ import Header from '../Header/Header';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ViewHealthRecord.css';
+import { pdfjs } from "react-pdf";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -29,7 +32,18 @@ const ViewHealthRecord = () => {
   const [sugarData, setSugarData] = useState([]);
   const [weightValue, setWeightValue] = useState('');
   const [weightData, setWeightData] = useState([]);
+  const [pdf, setPdf] = useState(null);
+  const [pdfList, setPdfList] = useState([]);
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    hospitalName: '',
+    doctorName: '',
+    date: '',
+    file: null,
+  });
 
+  const [viewDetails, setViewDetails] = useState(null);
   const userData = JSON.parse(sessionStorage.getItem('userdata'));
   const patientId = userData ? userData._id : null;
 
@@ -109,20 +123,47 @@ const ViewHealthRecord = () => {
     ],
   });
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, file: e.target.files[0] });
+  };
+
+  const handleSubmit = () => {
+    setViewDetails(formData);
+    setShowModal(false);
+  };
+
+  const handleCloseModal = () =>{
+    setShowModal(false);
+  };
+
+  const handleOpenModal = () =>{
+    setShowModal(true);
+  };
+
+  const handlePdfUpload = () =>{
+    
+  }
+
   return (
+    <>
     <div>
       <Header />
       <br />
       <div className="container">
-        <div className="card">
-          <div className="icon-wrapper">
-            <FaHeartbeat className="icon" />
+        <div className="ViewHealthRecordcard">
+          <div className="ViewHealthRecordicon-wrapper">
+            <FaHeartbeat className="ViewHealthRecordicon" />
           </div>
           <Line
             data={generateChartData('Blood Pressure', bpData, 'rgba(255, 99, 132, 1)')}
             className="line-chart"
           />
-          <div className="datepicker-wrapper">
+          <div className="ViewHealthRecorddatepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
           </div>
           <input
@@ -147,15 +188,15 @@ const ViewHealthRecord = () => {
           </button>
         </div>
 
-        <div className="card">
-          <div className="icon-wrapper">
-            <FaTint className="icon" />
+        <div className="ViewHealthRecordcard">
+          <div className="ViewHealthRecordicon-wrapper">
+            <FaTint className="ViewHealthRecordicon" />
           </div>
           <Line
             data={generateChartData('Sugar Level', sugarData, 'rgba(54, 162, 235, 1)')}
             className="line-chart"
           />
-          <div className="datepicker-wrapper">
+          <div className="ViewHealthRecorddatepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
           </div>
           <input
@@ -180,15 +221,15 @@ const ViewHealthRecord = () => {
           </button>
         </div>
 
-        <div className="card">
-          <div className="icon-wrapper">
-            <FaWeightHanging className="icon" />
+        <div className="ViewHealthRecordcard">
+          <div className="ViewHealthRecordicon-wrapper">
+            <FaWeightHanging className="ViewHealthRecordicon" />
           </div>
           <Line
             data={generateChartData('Weight', weightData, 'rgba(75, 192, 192, 1)')}
             className="line-chart"
           />
-          <div className="datepicker-wrapper">
+          <div className="ViewHealthRecorddatepicker-wrapper">
             <DatePicker selected={date} onChange={(date) => setDate(date)} />
           </div>
           <input
@@ -214,8 +255,92 @@ const ViewHealthRecord = () => {
         </div>
       </div>
       <ToastContainer />
+    
+
     </div>
+    <br></br>
+    <br></br>
+
+    <div className="pdf-section">
+  
+  <div>
+      
+      <Button onClick={handleOpenModal}>Upload Prescription</Button>
+
+     
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Prescription</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Hospital Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="hospitalName"
+                value={formData.hospitalName}
+                onChange={handleInputChange}
+                placeholder="Enter hospital name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Doctor Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="doctorName"
+                value={formData.doctorName}
+                onChange={handleInputChange}
+                placeholder="Enter doctor name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Upload File</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleFileChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* View Details Section */}
+      {viewDetails && (
+        <div className="mt-4">
+          <h5>Uploaded Prescription Details:</h5>
+          <p><strong>Hospital Name:</strong> {viewDetails.hospitalName}</p>
+          <p><strong>Doctor Name:</strong> {viewDetails.doctorName}</p>
+          <p><strong>Date:</strong> {viewDetails.date}</p>
+          <p><strong>Uploaded File:</strong> {viewDetails.file?.name}</p>
+        </div>
+      )}
+    </div>
+   
+</div>
+
+        <ToastContainer />
+      
+    </>
   );
 };
+    
 
 export default ViewHealthRecord;
