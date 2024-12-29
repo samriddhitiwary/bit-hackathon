@@ -87,6 +87,12 @@
     transition: background 0.3s ease, transform 0.3s ease;
     margin-left: auto; 
     margin-top: -10%;
+    align-self: center;
+}
+.book-appointment-button {
+    margin-top: 20px;
+    align-self: center;
+
 }
 .Patient-book-appointment-btn:hover {
     background: linear-gradient(45deg, #0056b3, #3388cc);
@@ -97,7 +103,15 @@
     margin-top: 15px;
     text-align: left;
     font-size: 14px;
+    display: flex;
+    flex-direction: column;
     
+}
+
+.doctor-availability {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;
 }
 
 .doctor-schedule h4 {

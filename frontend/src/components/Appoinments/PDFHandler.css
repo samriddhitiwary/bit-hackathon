@@ -33,16 +33,16 @@
     align-items: center;
   }
   
-  .table tr:nth-child(odd) {
-    background-color: #f4bcbc; 
+  .table tbody tr:nth-child(odd) {
+    background-color: #f4bcbc; /* Light pink for odd rows */
   }
   
-  .table tr:nth-child(even) {
+  .table tbody tr:nth-child(even) {
     background-color: #eaf4fc; /* Light blue for even rows */
   }
   
-  .table tr:hover {
-    background-color: #d0e7ff; /* Brighter blue on hover */
+  .table tbody tr:hover {
+    background-color: #d0e7ff; /* Hover effect */
     transition: background-color 0.3s ease;
   }
   
