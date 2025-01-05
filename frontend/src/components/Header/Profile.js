@@ -9,8 +9,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ToastContainer from 'react-toast';
 import { toast } from 'react-toast';
-// import './Profile.css';
+import './Profile.css';
 import moment from 'moment';
+import Header from './Header';
+import Footer from '../Footer/Footer';
 
 const Profile = () => {
   const initialUser = {
@@ -27,7 +29,6 @@ const Profile = () => {
   const [isExistingUser, setIsExistingUser] = useState(false);
   const navigate = useNavigate();
 
-  
   const inputHandler = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -36,21 +37,19 @@ const Profile = () => {
   const dateFromDateString = (dateString) => {
     return moment(new Date(dateString)).format('YYYY-MM-DD');
   };
-  
+
   const submitForm = async (e) => {
     e.preventDefault();
     try {
       let response;
       if (isExistingUser) {
-        
-         response = await axios.put(
+        response = await axios.put(
           `http://localhost:8000/api/user/update/${user._id}`,
           user
         );
         toast.success(response.data.msg, { position: 'top-right' });
       } else {
-        
-         response = await axios.post(
+        response = await axios.post(
           'http://localhost:8000/api/user/create',
           { ...user, email: firebaseUser.email }
         );
@@ -63,7 +62,6 @@ const Profile = () => {
     }
   };
 
-
   useEffect(() => {
     const fetchUser = async (email) => {
       try {
@@ -75,7 +73,7 @@ const Profile = () => {
           response.data.dob = dob;
           setUser(response.data);
           setIsExistingUser(true);
-          sessionStorage.setItem('userdata', JSON.stringify(response.data))
+          sessionStorage.setItem('userdata', JSON.stringify(response.data));
         }
       } catch (error) {
         console.error(error);
@@ -95,7 +93,6 @@ const Profile = () => {
     return () => unsubscribe();
   }, [navigate]);
 
-  
   const handleLogout = () => {
     auth.signOut();
     navigate('/');
@@ -106,120 +103,144 @@ const Profile = () => {
   }
 
   return (
-    <Container className="mt-5 d-flex justify-content-evenly flex-column">
-      <h2 className="text-center mb-4">Welcome, {firebaseUser.displayName}</h2>
-      <div className="text-center mb-4">
-        <img
-          src={firebaseUser.photoURL}
-          alt={firebaseUser.displayName}
-          className="rounded-circle"
-          style={{ width: '150px', height: '150px' }}
-        />
-      </div>
-      <div className="text-center mb-4">Email: {firebaseUser.email}</div>
-      {/* <div className="d-flex justify-content-center mb-4">
-        <Button onClick={handleLogout} variant="danger" className="btn-3d">
-          Logout
-        </Button>
-      </div> */}
+    <>
+      <Container className="mt-5 d-flex justify-content-evenly flex-column profile-container">
+        <video className="background-video" autoPlay loop muted>
+          <source src="/videos/v4.mp4" type="video/mp4" />
+        </video>
 
-      {/* <h3 className="mb-4 text-center">
-        {isExistingUser ? 'Update Your Profile' : 'Create Your Profile'}
-      </h3> */}
-      <Form onSubmit={submitForm}>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group controlId="firstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your first name"
-                name="fname"
-                value={user.fname}
-                onChange={inputHandler}
-                required
+        <div className="profile-content">
+          <Form onSubmit={submitForm}>
+            <h2
+              className="text-center mb-4"
+              style={{
+                fontWeight: 'bold',
+                color: 'black',
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
+              }}
+            >
+              Welcome, {firebaseUser.displayName}
+            </h2>
+            <div className="text-center mb-4">
+              <img
+                src={firebaseUser.photoURL}
+                alt={firebaseUser.displayName}
+                className="rounded-circle"
+                style={{
+                  width: '150px',
+                  height: '150px',
+                  
+                }}
               />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="lastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your last name"
-                name="lname"
-                value={user.lname}
-                onChange={inputHandler}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+            </div>
+            <div
+              className="text-center mb-4"
+              style={{
+                fontWeight: 'bold',
+                color: 'black',
+                textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)',
+              }}
+            >
+              Email: {firebaseUser.email}
+            </div>
 
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group controlId="dob">
-              <Form.Label>Date of Birth</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                value={user.dob}
-                onChange={inputHandler}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="address">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your address"
-                name="address"
-                value={user.address}
-                onChange={inputHandler}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group controlId="firstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your first name"
+                    name="fname"
+                    value={user.fname}
+                    onChange={inputHandler}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="lastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your last name"
+                    name="lname"
+                    value={user.lname}
+                    onChange={inputHandler}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group controlId="weight">
-              <Form.Label>Weight</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter your weight"
-                name="weight"
-                value={user.weight}
-                onChange={inputHandler}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="bloodGroup">
-              <Form.Label>Blood Group</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your blood group"
-                name="blood_group"
-                value={user.blood_group}
-                onChange={inputHandler}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group controlId="dob">
+                  <Form.Label>Date of Birth</Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="dob"
+                    value={user.dob}
+                    onChange={inputHandler}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="address">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your address"
+                    name="address"
+                    value={user.address}
+                    onChange={inputHandler}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-        <div className="d-flex justify-content-center mt-4">
-          <Button type="submit" variant="primary" className="btn-3d">
-            {isExistingUser ? 'Update Profile' : 'Create Profile'}
-          </Button>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group controlId="weight">
+                  <Form.Label>Weight</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter your weight"
+                    name="weight"
+                    value={user.weight}
+                    onChange={inputHandler}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="bloodGroup">
+                  <Form.Label>Blood Group</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your blood group"
+                    name="blood_group"
+                    value={user.blood_group}
+                    onChange={inputHandler}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <div className="d-flex justify-content-center mt-4">
+              <Button type="submit" variant="primary" className="btn-3d">
+                {isExistingUser ? 'Update Profile' : 'Create Profile'}
+              </Button>
+            </div>
+          </Form>
         </div>
-      </Form>
-    </Container>
+      </Container>
+
+      
+    </>
   );
 };
 
