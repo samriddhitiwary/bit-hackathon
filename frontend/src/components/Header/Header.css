@@ -1,148 +1,73 @@
-.header{
-  background-color:rgb(54, 206, 206);
-  padding: 0.1%;
- 
-  
+.header {
+  background-color: rgb(54, 206, 206);
+  padding: 0.1% 1%;
 }
-.wordsInHeader{
+
+.wordsInHeader {
   color: white;
   font-size: 15px;
-  margin-left: 70%;
-  
-}
-.imgDiv{
-  display: inline-block;  
-  
+  text-align: right;
+  margin: 0;
 }
 
-.img{
-  margin-left: 10%;
-  width: 50%;
-  border-color: black;
-}
-.search{
-  border-color: black 2px;
-  width:50%;  
-  /* margin-left: 30%; */
- display: inline-block;
- margin-top: 1%;
-
-}
-.headerFlexBox{
+.headerFlexBox {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% 5%;
 }
-.header_but:hover{
 
-  box-shadow: 10px 10px 10px black;
+.img {
+  width: 120px; 
+}
+
+.search {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 2%;
+}
+
+.search .form-control {
+  width: 50%; 
+  border-radius: 20px 0 0 20px;
+}
+
+.search .btn {
+  border-radius: 0 20px 20px 0;
+}
+
+.header_but:hover {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
   background-color: rgb(54, 206, 206);
 }
 
 .profile-icon {
-  margin-top: 42%;
-  width: 30px; 
-  height: 30px; 
-  border-radius: 50%; 
-  object-fit: cover; 
-}
-
-
-
-.btn-3d {
-  background: linear-gradient(145deg, #030d1d, #3399ff); 
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease-in-out;
-}
-
-.btn-3d:hover {
-  background: linear-gradient(145deg, #3399ff, #0066ff); /* Reverse gradient on hover */
-  transform: translateY(-4px); /* Creates the "lifting" effect */
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(255, 255, 255, 0.4);
-}
-
-.btn-3d:active {
-  transform: translateY(2px); /* Button sinks when clicked */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.3);
-}
-/* Profile Form Styles */
-.container {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-}
-
-h2 {
-  color: #333;
-  font-size: 28px;
-}
-
-h3 {
-  color: #0066cc;
-}
-
-.text-center {
-  color: #666;
-}
-
-img {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border: 2px solid #ddd;
-}
-
-.btn-3d {
-  background: linear-gradient(145deg, #0066ff, #3399ff);
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease-in-out;
-}
-
-.btn-3d:hover {
-  background: linear-gradient(145deg, #3399ff, #0066ff);
-  transform: translateY(-4px);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(255, 255, 255, 0.4);
-}
-
-.btn-3d:active {
-  transform: translateY(2px);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), -2px -2px 5px rgba(255, 255, 255, 0.3);
-}
-
-/* Style the form inputs */
-input[type="text"], input[type="number"], input[type="date"] {
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-  width: 80%;
-}
-
-input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
-  border-color: #0066cc;
-  outline: none;
+  margin-right: 20px; 
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
 }
 
 
 @media (max-width: 768px) {
-  .form-group {
-    margin-bottom: 15px;
+  .headerFlexBox {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .btn-3d {
-    width: 100%;
-    font-size: 18px;
+  .search .form-control {
+    width: 50%; 
+  }
+
+  .wordsInHeader {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .profile-icon {
+    margin-top: 10px;
   }
 }
-
-
-

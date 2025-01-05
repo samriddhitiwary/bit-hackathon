@@ -29,6 +29,14 @@ const Diagnostic = () => {
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    const handleMouseEnter = (e) => {
+        e.target.play();
+    };
+
+    const handleMouseLeave = (e) => {
+        e.target.pause();
+    };
+
     return (
         <div>
             <Header />
@@ -42,25 +50,57 @@ const Diagnostic = () => {
                     className="search-bar"
                 />
             </div>
-            <div className="table-container">
-                <table className="diagnostic-table">
-                    <thead>
-                        <tr>
-                            <th>TITLE</th>
-                            <th>VIEW</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredData.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.title}</td>
-                                <td>
-                                    <a href={item.view} className="view-link">View</a>
-                                </td>
+            <div className="diagnostic-container">
+                <div className="table-container">
+                    <table className="diagnostic-table">
+                        <thead>
+                            <tr>
+                                <th>TITLE</th>
+                                <th>VIEW</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {filteredData.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.title}</td>
+                                    <td>
+                                        <a href={item.view} className="view-link">View</a>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="video-column">
+                    <h3>Related Videos</h3>
+                    <video
+                        muted
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        className="video-player"
+                    >
+                        <source src="/videos/v2.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <video
+                        muted
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        className="video-player"
+                    >
+                        <source src="/videos/v1.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <video
+                        muted
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        className="video-player"
+                    >
+                        <source src="/videos/v3.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
             </div>
         </div>
     );

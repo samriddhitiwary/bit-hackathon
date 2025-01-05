@@ -89,7 +89,7 @@ function Chatbot() {
       {isChatbotOpen && (
         <div className="chatbot-container">
           <div className="chatbot-header">
-            Chatbot
+            Medical Assisstant
             <button
               className="chatbot-close"
               onClick={() => setIsChatbotOpen(false)}
