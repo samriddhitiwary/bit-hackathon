@@ -38,6 +38,7 @@ import Discogram from './components/Appoinments/Diagnostic/Discogram';
 import Holter_monitor from './components/Appoinments/Diagnostic/Holter_monitor';
 import Afp_test from './components/Appoinments/Diagnostic/Afp_test';
 import Chatbot from './components/Chatbot/Chatbot';
+import AppointmentsWidget from './components/AppointmentsWidget/AppointmentsWidget';
 
 function App() {
   useEffect(() => {
@@ -129,6 +130,7 @@ function App() {
         </Route>
       </Routes>
       <Chatbot/>
+      <AppointmentsWidget />
     </Router>
   );
 }

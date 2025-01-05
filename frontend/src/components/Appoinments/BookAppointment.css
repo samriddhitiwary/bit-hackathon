@@ -235,3 +235,89 @@
     margin-left: 60%;
     margin-top: -10%;
   }
+
+  /* General container styling */
+.appointment-container {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Title styling */
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Filters container with better spacing and alignment */
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+/* Individual filter item styling */
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+/* Label styling */
+.filter-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Select box styling */
+.filter-select {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f5f7fa;
+  transition: border-color 0.3s ease;
+}
+
+.filter-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Input field styling */
+.filter-input {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f5f7fa;
+  transition: border-color 0.3s ease;
+}
+
+.filter-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filters-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}

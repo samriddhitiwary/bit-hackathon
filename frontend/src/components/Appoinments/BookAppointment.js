@@ -154,13 +154,17 @@ const BookAppointment = () => {
       <Header />
       <br />
       <MiniNavbar />
+      <br />
+      <br />
+      <br />
       <div className="appointment-container">
         <h1>Book an Appointment</h1>
 
         <div className="filters-container">
           <div className="filter-item">
-            <label>Select Specialization</label>
+            <label className="filter-label">Select Specialization</label>
             <select
+              className="filter-select"
               onChange={handleSpecializationChange}
               value={specialization}
             >
@@ -176,8 +180,12 @@ const BookAppointment = () => {
           </div>
 
           <div className="filter-item">
-            <label>Select City</label>
-            <select onChange={handleCityChange} value={city}>
+            <label className="filter-label">Select City</label>
+            <select
+              className="filter-select"
+              onChange={handleCityChange}
+              value={city}
+            >
               <option value="">All Cities</option>
               {Array.from(
                 new Set(doctors.map((doctor) => doctor.Location))
@@ -190,8 +198,9 @@ const BookAppointment = () => {
           </div>
 
           <div className="filter-item">
-            <label>Search by Name</label>
+            <label className="filter-label">Search by Name</label>
             <input
+              className="filter-input"
               type="text"
               placeholder="Search for a doctor"
               value={searchTerm}

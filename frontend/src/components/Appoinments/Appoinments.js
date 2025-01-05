@@ -1,5 +1,3 @@
-// // AIzaSyDVNS9gjaUlsaW-Xcu4BI7JEuzfnr1gotM
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
