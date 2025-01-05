@@ -247,3 +247,95 @@ ul {
 .update-appointment-modal .save-btn:hover {
   background-color: #0056b3;
 }
+
+
+/* Container for the whole appointment list */
+.ViewAppointments-appointment-list {
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+/* Sub-title styling */
+.sub-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #444;
+}
+
+/* Styling for available times section */
+.available-times {
+  margin-bottom: 32px;
+}
+
+/* Times list styling */
+.times-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.times-list .time-item {
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.times-list .time-item:hover {
+  background-color: #e0e0e0;
+}
+
+/* Active appointments styling */
+.active-appointments {
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* List of active appointments */
+.active-appointments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each active appointment item */
+.appointment-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s;
+}
+
+.appointment-item:hover {
+  background-color: #f9f9f9;
+}
+
+/* Styling for patient name and appointment time */
+.patient-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.appointment-time {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #777;
+}

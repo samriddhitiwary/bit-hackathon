@@ -157,7 +157,12 @@ const BookAppointment = () => {
       <br />
       <br />
       <br />
-      <div className="appointment-container">
+      <div className="appointment-container"
+      style={{
+        background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(245, 245, 245, 1) 100%), url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' fill=\'none\'><circle cx=\'20\' cy=\'20\' r=\'2\' fill=\'%23d1e3f8\'/></svg>")',
+        backgroundSize: '40px 40px, cover',
+      }}
+      >
         <h1>Book an Appointment</h1>
 
         <div className="filters-container">

@@ -90,36 +90,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { FaUserCircle } from 'react-icons/fa'; // User icon
-// import { auth } from './Firebase';
-// import Button from 'react-bootstrap/Button';
-
-// const Header = ({ user }) => {
-//   const handleLogout = () => {
-//     auth.signOut();
-//   };
-
-//   return (
-//     <header>
-//       <nav>
-//         <Link to="/">Home</Link>
-//         {user ? (
-//           <>
-//             <Link to="/profile">
-//               <FaUserCircle style={{ fontSize: '30px', cursor: 'pointer' }} />
-//             </Link>
-//             <Button onClick={handleLogout}>Logout</Button>
-//           </>
-//         ) : (
-//           <Link to="/login">Login</Link>
-//         )}
-//       </nav>
-//     </header>
-//   );
-// };
-
-// export default Header;

@@ -151,19 +151,21 @@ const ViewAppointments = () => {
       <MiniNavbar />
       <ToastContainer />
       <div className="ViewAppointments-appointment-list">
-        <h2>Scheduled Appointments</h2>
+  <h2 className="section-title">Scheduled Appointments</h2>
 
-        {availableTimes && (
-          <div className="available-times">
-            <h3>Available Times</h3>
-            <ul>
-              {availableTimes.map((time, index) => (
-                <li key={index}>{time}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <h3>Active Appointments</h3>
+  {availableTimes && (
+    <div className="available-times">
+      <h3 className="sub-title">Available Times</h3>
+      <ul className="times-list">
+        {availableTimes.map((time, index) => (
+          <li key={index} className="time-item">
+            {time}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+        <h3 className="sub-title">Active Appointments</h3>
         {activeAppointments.length > 0 ? (
           <ul className="active-appointments">
             {activeAppointments.map((appointment) => (
@@ -215,7 +217,7 @@ const ViewAppointments = () => {
           <p>No active appointments.</p>
         )}
 
-        <h3>Canceled Appointments</h3>
+        {/* <h3>Canceled Appointments</h3>
         {canceledAppointments.length > 0 ? (
           <ul>
             {canceledAppointments.map((appointment) => (
@@ -252,7 +254,7 @@ const ViewAppointments = () => {
           </ul>
         ) : (
           <p>No canceled appointments.</p>
-        )}
+        )} */}
       </div>
 
       <Modal

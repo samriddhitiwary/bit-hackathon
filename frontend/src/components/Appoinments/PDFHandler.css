@@ -2,6 +2,7 @@
     padding: 20px;
     max-width: 90%;
     margin: 0 auto;
+    text-align: center;
   }
   
   .table-container h2 {
@@ -9,6 +10,7 @@
     margin-bottom: 20px;
     font-family: "Arial", sans-serif;
     color: #333;
+    text-align: center;
   }
   
   .table {
@@ -16,6 +18,7 @@
     border-collapse: collapse;
     margin: 0 auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
   }
   
   .table th,
@@ -24,6 +27,7 @@
     border: 1px solid #ddd;
     text-align: left;
     font-family: "Arial", sans-serif;
+    text-align: center;
   }
   
   .table th {
