@@ -45,8 +45,9 @@ const PDFHandler = () => {
 
   return (
     <div className="table-container">
-      <h2>Prescriptions</h2>
+      
       {allPrescriptions.length > 0 ? (
+        
         <table className="table">
           <thead>
             <tr>

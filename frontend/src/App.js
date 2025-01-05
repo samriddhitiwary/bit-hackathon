@@ -37,6 +37,7 @@ import Cerebral_angiogram from './components/Appoinments/Diagnostic/Cerebral_ang
 import Discogram from './components/Appoinments/Diagnostic/Discogram';
 import Holter_monitor from './components/Appoinments/Diagnostic/Holter_monitor';
 import Afp_test from './components/Appoinments/Diagnostic/Afp_test';
+import Chatbot from './components/Chatbot/Chatbot';
 
 function App() {
   useEffect(() => {
@@ -127,6 +128,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
+      <Chatbot/>
     </Router>
   );
 }
@@ -141,7 +143,7 @@ const MainLayout = () => (
     <Outlet />
     <br />
     <PatientCare />
-    <FooterAppointments />
+    {/* <FooterAppointments /> */}
     <Footer />
   </>
 );
