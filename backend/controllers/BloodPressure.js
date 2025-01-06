@@ -1,10 +1,11 @@
 import BloodPressure from '../models/BloodPressure.js';
+import { convertDate } from '../middleware/dateUtil.js';
 
 export const getValueforBP = async(req, res)=>{
     try {
-
+        req.body.date = convertDate(req.body.date);
         const bpData = new BloodPressure(req.body);
-        await bpData.deleteOne({'patientId' : bpData.patientId, 'date': bpData.date })
+        await BloodPressure.deleteOne({'patientId' : bpData.patientId, 'date': bpData.date })
 
         if(!bpData){
             return res.status(404).json({msg: "Blood Pressure data not found"});

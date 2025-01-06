@@ -106,8 +106,8 @@ const ViewHealthRecord = () => {
 
       const newRecord = { date: date.toLocaleDateString(), value };
       const updatedData = [...data, newRecord].slice(-5);
-
-      setData(updatedData);
+      await fetchInitialData();
+      // setData(updatedData);
       toast.success(`${label} data recorded successfully!`);
     } catch (error) {
       console.error(error);

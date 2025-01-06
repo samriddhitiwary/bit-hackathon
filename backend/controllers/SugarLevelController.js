@@ -1,10 +1,11 @@
 import SugarLevel from '../models/SugarLevelModel.js';
+import { convertDate } from '../middleware/dateUtil.js';
 
 export const getValueforSugarLevel = async(req, res)=>{
     try {
-
+        req.body.date = convertDate(req.body.date);
         const SugarLevelData = new SugarLevel(req.body);
-        await SugarLevelData.deleteOne({'patientId' : SugarLevelData.patientId, 'date': SugarLevelData.date })
+        await SugarLevel.deleteOne({'patientId' : SugarLevelData.patientId, 'date': SugarLevelData.date })
 
         if(!SugarLevelData){
             return res.status(404).json({msg: "Sugar level data not found"});
@@ -32,4 +33,3 @@ export const getAll_SugarLevel_RecordsbyId = async (req, res) => {
         res.status(500).json({ error: error.message }); 
     }
 };
-

@@ -1,10 +1,11 @@
 import Weight from '../models/WeightModel.js';
+import { convertDate } from '../middleware/dateUtil.js';
 
 export const getValueforWeight = async(req, res)=>{
     try {
-
+        req.body.date = convertDate(req.body.date);
         const WeightData = new Weight(req.body);
-        await WeightData.deleteOne({'patientId' : WeightData.patientId, 'date': WeightData.date })
+        await Weight.deleteOne({'patientId' : WeightData.patientId, 'date': WeightData.date })
 
         if(!WeightData){
             return res.status(404).json({msg: "Weight data not found"});
@@ -33,4 +34,3 @@ export const getAll_WeightLevel_RecordsbyId = async (req, res) => {
         res.status(500).json({ error: error.message }); 
     }
 };
-
