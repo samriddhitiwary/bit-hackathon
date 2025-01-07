@@ -7,7 +7,8 @@
     "protein_g": 0.17,
     "carbohydrates_total_g": 0.08,
     "fiber_g": 0.01,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://t3.ftcdn.net/jpg/07/19/06/06/240_F_719060666_WzTBgc6LqpbKK8bkzl7UKmyklsoYLhMI.jpg"
   },
   {
     "name": "Chole Bhature",
@@ -17,7 +18,8 @@
     "protein_g": 0.05,
     "carbohydrates_total_g": 0.36,
     "fiber_g": 0.03,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/chole_bhature.jpg"
   },
   {
     "name": "Biryani",
@@ -27,7 +29,8 @@
     "protein_g": 0.096,
     "carbohydrates_total_g": 0.224,
     "fiber_g": 0.018,
-    "sugar_g": 0.012
+    "sugar_g": 0.012,
+    "image_url": "https://example.com/images/biryani.jpg"
   },
   {
     "name": "Masoor Dal",
@@ -37,7 +40,8 @@
     "protein_g": 0.08,
     "carbohydrates_total_g": 0.17,
     "fiber_g": 0.05,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/masoor_dal.jpg"
   },
   {
     "name": "Samosa",
@@ -47,7 +51,8 @@
     "protein_g": 0.035,
     "carbohydrates_total_g": 0.155,
     "fiber_g": 0.023,
-    "sugar_g": 0.012
+    "sugar_g": 0.012,
+    "image_url": "https://example.com/images/samosa.jpg"
   },
   {
     "name": "Pani Puri",
@@ -57,7 +62,8 @@
     "protein_g": 0.028,
     "carbohydrates_total_g": 0.2,
     "fiber_g": 0.02,
-    "sugar_g": 0.016
+    "sugar_g": 0.016,
+    "image_url": "https://example.com/images/pani_puri.jpg"
   },
   {
     "name": "Aloo Paratha",
@@ -67,7 +73,8 @@
     "protein_g": 0.04,
     "carbohydrates_total_g": 0.253,
     "fiber_g": 0.033,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/aloo_paratha.jpg"
   },
   {
     "name": "Dosa",
@@ -77,7 +84,8 @@
     "protein_g": 0.06,
     "carbohydrates_total_g": 0.25,
     "fiber_g": 0.03,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/dosa.jpg"
   },
   {
     "name": "Idli",
@@ -87,7 +95,8 @@
     "protein_g": 0.03,
     "carbohydrates_total_g": 0.15,
     "fiber_g": 0.02,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/idli.jpg"
   },
   {
     "name": "Palak Paneer",
@@ -97,7 +106,8 @@
     "protein_g": 0.075,
     "carbohydrates_total_g": 0.045,
     "fiber_g": 0.013,
-    "sugar_g": 0.015
+    "sugar_g": 0.015,
+    "image_url": "https://example.com/images/palak_paneer.jpg"
   },
   {
     "name": "Pav Bhaji",
@@ -107,7 +117,8 @@
     "protein_g": 0.06,
     "carbohydrates_total_g": 0.3,
     "fiber_g": 0.02,
-    "sugar_g": 0.03
+    "sugar_g": 0.03,
+    "image_url": "https://example.com/images/pav_bhaji.jpg"
   },
   {
     "name": "Tandoori Chicken",
@@ -117,7 +128,8 @@
     "protein_g": 0.21,
     "carbohydrates_total_g": 0.03,
     "fiber_g": 0.01,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/tandoori_chicken.jpg"
   },
   {
     "name": "Momos",
@@ -127,7 +139,8 @@
     "protein_g": 0.08,
     "carbohydrates_total_g": 0.24,
     "fiber_g": 0.03,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/momos.jpg"
   },
   {
     "name": "Kadhi Pakora",
@@ -137,7 +150,8 @@
     "protein_g": 0.09,
     "carbohydrates_total_g": 0.18,
     "fiber_g": 0.04,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/kadhi_pakora.jpg"
   },
   {
     "name": "Dhokla",
@@ -147,7 +161,8 @@
     "protein_g": 0.07,
     "carbohydrates_total_g": 0.27,
     "fiber_g": 0.02,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/dhokla.jpg"
   },
   {
     "name": "Chole Tikka",
@@ -157,7 +172,8 @@
     "protein_g": 0.18,
     "carbohydrates_total_g": 0.18,
     "fiber_g": 0.03,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/chole_tikka.jpg"
   },
   {
     "name": "Gulab Jamun",
@@ -167,7 +183,8 @@
     "protein_g": 0.06,
     "carbohydrates_total_g": 0.35,
     "fiber_g": 0.01,
-    "sugar_g": 0.25
+    "sugar_g": 0.25,
+    "image_url": "https://example.com/images/gulab_jamun.jpg"
   },
   {
     "name": "Rogan Josh",
@@ -177,7 +194,8 @@
     "protein_g": 0.25,
     "carbohydrates_total_g": 0.1,
     "fiber_g": 0.02,
-    "sugar_g": 0.04
+    "sugar_g": 0.04,
+    "image_url": "https://example.com/images/rogan_josh.jpg"
   },
   {
     "name": "Pesarattu",
@@ -187,7 +205,8 @@
     "protein_g": 0.1,
     "carbohydrates_total_g": 0.3,
     "fiber_g": 0.03,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/pesarattu.jpg"
   },
   {
     "name": "Vada Pav",
@@ -197,7 +216,8 @@
     "protein_g": 0.08,
     "carbohydrates_total_g": 0.32,
     "fiber_g": 0.03,
-    "sugar_g": 0.02
+    "sugar_g": 0.02,
+    "image_url": "https://example.com/images/vada_pav.jpg"
   },
   {
     "name": "Roti",
@@ -207,7 +227,8 @@
     "protein_g": 0.08,
     "carbohydrates_total_g": 0.45,
     "fiber_g": 0.03,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/roti.jpg"
   },
   {
     "name": "Rice",
@@ -217,7 +238,8 @@
     "protein_g": 0.03,
     "carbohydrates_total_g": 0.28,
     "fiber_g": 0.01,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/rice.jpg"
   },
   {
     "name": "Daal",
@@ -227,7 +249,8 @@
     "protein_g": 0.08,
     "carbohydrates_total_g": 0.15,
     "fiber_g": 0.02,
-    "sugar_g": 0.01
+    "sugar_g": 0.01,
+    "image_url": "https://example.com/images/daal.jpg"
   },
   {
     "name": "Oil",
@@ -237,7 +260,8 @@
     "protein_g": 0,
     "carbohydrates_total_g": 0,
     "fiber_g": 0,
-    "sugar_g": 0
+    "sugar_g": 0,
+    "image_url": "https://example.com/images/oil.jpg"
   },
   {
     "name": "Ghee",
@@ -247,7 +271,8 @@
     "protein_g": 0,
     "carbohydrates_total_g": 0,
     "fiber_g": 0,
-    "sugar_g": 0
+    "sugar_g": 0,
+    "image_url": "https://example.com/images/ghee.jpg"
   },
   {
     "name": "Tea",
@@ -257,16 +282,7 @@
     "protein_g": 0.01,
     "carbohydrates_total_g": 0.04,
     "fiber_g": 0,
-    "sugar_g": 0.02
-  },
-  {
-    "name": "Coffee",
-    "calories": 0.3,
-    "serving_size": "1 cup",
-    "fat_total_g": 0,
-    "protein_g": 0.01,
-    "carbohydrates_total_g": 0.06,
-    "fiber_g": 0,
-    "sugar_g": 0.02
+    "sugar_g": 0,
+    "image_url": "https://example.com/images/tea.jpg"
   }
 ]

@@ -5,7 +5,7 @@ const meals = express.Router();
 
 
 meals.post("/meal-data", createMeal);
-meals.get("/get-all-meals/:patientId", getAllMealsOfOnePatientByDate);
-meals.delete("/delete-meal/:patientId", deleteMeal);
+meals.get("/get-all-meals/:patientId/:date", getAllMealsOfOnePatientByDate);
+meals.delete("/delete-meal/:id", deleteMeal);
 meals.put("/update-meal/:id", updateMeal);
 export default meals;

@@ -29,7 +29,11 @@ const Appointments = () => {
         <p>Consult Online</p>
       </Button>
 
-      <Button className="but" variant="light">
+      <Button 
+      className="but" 
+      variant="light" 
+      onClick={() => navigate("/nutrients")}
+      >
         <img src="images/Appointments/img4.svg" alt="Buy Medicine" />
         <p>Culnary</p>
       </Button>

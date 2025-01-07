@@ -42,4 +42,4 @@ app.use("/api/healthrecord",getValueforBPRouter);
 app.use("/api/healthrecord",getValueforSugarLevelRouter);
 app.use("/api/healthrecord",getValueforWeightRouter);
 app.use("/api/pdfdetails", getPDFrouter);
-app.use("/api/Nutrients",meals);
+app.use("/api/nutrients",meals);

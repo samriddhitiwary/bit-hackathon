@@ -39,6 +39,7 @@ import Holter_monitor from './components/Appoinments/Diagnostic/Holter_monitor';
 import Afp_test from './components/Appoinments/Diagnostic/Afp_test';
 import Chatbot from './components/Chatbot/Chatbot';
 import AppointmentsWidget from './components/AppointmentsWidget/AppointmentsWidget';
+import Nutrients_Value from './components/Appoinments/Nutrients_Value';
 
 function App() {
   useEffect(() => {
@@ -69,6 +70,7 @@ function App() {
         <Route path="/view-appointment" element={<ViewAppointments />} />
         <Route path="/view-health-record" element={<ViewHealthRecord />} />
         <Route path="/diagnostic-investigations" element={<Diagnostic />} />
+        <Route path="/nutrients" element={<Nutrients_Value />} />
 
        
         <Route path="/abdominal-ultrasound" element={<DiagnosticLayout />}>
