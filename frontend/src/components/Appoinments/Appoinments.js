@@ -31,7 +31,7 @@ const Appointments = () => {
 
       <Button className="but" variant="light">
         <img src="images/Appointments/img4.svg" alt="Buy Medicine" />
-        <p>Buy Medicine</p>
+        <p>Culnary</p>
       </Button>
 
       <Button
