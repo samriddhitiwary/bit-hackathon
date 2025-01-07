@@ -54,6 +54,7 @@ function App() {
           <Route path="/speciality" element={<Speciality />} />
           <Route path="/procedures" element={<Procedures />} />
           <Route path="/prohealth" element={<ProHealth />} />
+          <Route path="/login" element={<Login />} />
         </Route>
 
         {/* Separate layout for Profile page */}
@@ -126,7 +127,7 @@ function App() {
 
         {/* Only Header is rendered for /login route */}
         <Route path="/login" element={<HeaderOnlyLayout />}>
-          <Route path="/login" element={<Login />} />
+         
         </Route>
       </Routes>
       <Chatbot/>

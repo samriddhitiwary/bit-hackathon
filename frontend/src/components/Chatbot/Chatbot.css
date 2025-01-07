@@ -121,14 +121,14 @@
   .chatgpt-message {
     background: #e0f7fa;
     color: #006064;
-    align-self: flex-start;
+    align-self: flex-start; /* Align to the left */
     border-top-left-radius: 0;
   }
   
   .user-message {
     background: #e8f5e9;
     color: #33691e;
-    align-self: flex-end;
+    align-self: flex-end; /* Align to the right */
     border-top-right-radius: 0;
   }
   
