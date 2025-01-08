@@ -3,12 +3,12 @@
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
-    width: 200px;
+    width: 100px;
     text-align: center;
   }
   
   .card img {
-    width: 50%; /* Adjust to fit within the card */
+    width: 70%; /* Adjust to fit within the card */
     height: auto; /* Maintain aspect ratio */
     max-width: 150px; /* Set a max-width for the image */
     margin-bottom: 10px;

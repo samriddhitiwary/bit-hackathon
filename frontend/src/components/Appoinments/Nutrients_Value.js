@@ -1,28 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Button, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
-import NutrientsData from './Nutrients_Data.json'; // Assuming the JSON file is in the same directory
+import React, { useState } from 'react';
+import { Card, Button, Row, Col, Form, Table, Container } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import NutrientsData from './Nutrients_Data.json';
 
 const NutrientsValue = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [mealType, setMealType] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleIncrement = (index) => {
-    const updatedItems = [...selectedItems];
-    updatedItems[index].quantity += 1;
+  const handleIncrement = (name) => {
+    const updatedItems = selectedItems.map((item) =>
+      item.name === name ? { ...item, quantity: item.quantity + 1 } : item
+    );
     setSelectedItems(updatedItems);
   };
 
-  const handleDecrement = (index) => {
-    const updatedItems = [...selectedItems];
-    if (updatedItems[index].quantity > 1) {
-      updatedItems[index].quantity -= 1;
-    }
+  const handleDecrement = (name) => {
+    const updatedItems = selectedItems.map((item) =>
+      item.name === name && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
     setSelectedItems(updatedItems);
   };
 
-  const handleSelectItem = (item) => {
-    if (!selectedItems.find((i) => i.name === item.name)) {
+  const handleCheckboxToggle = (item) => {
+    const exists = selectedItems.find((i) => i.name === item.name);
+    if (exists) {
+      setSelectedItems(selectedItems.filter((i) => i.name !== item.name));
+    } else {
       setSelectedItems([...selectedItems, { ...item, quantity: 1 }]);
     }
   };
@@ -32,42 +41,151 @@ const NutrientsValue = () => {
     setTotalCalories(total);
   };
 
-  const saveSelectedItemsToDatabase = () => {
-    axios.post('/api/save-items', selectedItems)
-      .then(response => {
-        console.log('Items saved successfully', response);
-      })
-      .catch(error => {
-        console.error('Error saving items', error);
+  const filteredItems = NutrientsData.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const saveMealData = async () => {
+    const patientId = JSON.parse(sessionStorage.getItem('userdata'))?._id;
+
+    if (!patientId) {
+      alert('Patient ID not found. Please log in.');
+      return;
+    }
+
+    const payload = {
+      patientId: patientId,
+      date: selectedDate,
+      mealtype: mealType,
+      meals: selectedItems.map((item) => ({
+        item: item.name,
+        quantity: item.quantity,
+      })),
+    };
+
+    try {
+      const response = await fetch('http://localhost:8000/api/nutrients/meal-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert('Meal data stored successfully!');
+      } else {
+        alert(`Error: ${result.message || 'Failed to save meal data.'}`);
+      }
+    } catch (error) {
+      console.error('Error saving meal data:', error);
+      alert('An error occurred while saving meal data.');
+    }
   };
 
   return (
     <div>
       <h1>Nutrients Value</h1>
-      <Row>
-        {NutrientsData.map((item, index) => (
-          <Col md={4} key={index}>
-            <Card onClick={() => handleSelectItem(item)} style={{ cursor: 'pointer' }}>
-              <Card.Img variant="top" src={item.image_url} />
-              <Card.Body>
-                <Card.Title>{item.name}</Card.Title>
-                <Card.Text>Calories: {item.calories} per {item.serving_size}</Card.Text>
-                <Button variant="primary" onClick={(e) => { e.stopPropagation(); handleDecrement(index); }}>-</Button>
-                <span> {selectedItems.find(i => i.name === item.name)?.quantity || 0} </span>
-                <Button variant="primary" onClick={(e) => { e.stopPropagation(); handleIncrement(index); }}>+</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <div>
-        <Button variant="success" onClick={handleClickCalories}>Calculate Calories</Button>
-        <h3>Total Calories: {totalCalories}</h3>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          dateFormat="dd/MM/yyyy"
+        />
+        <Form.Select
+          value={mealType}
+          onChange={(e) => setMealType(e.target.value)}
+          style={{ marginLeft: '10px', maxWidth: '200px' }}
+        >
+          <option value="">Select Meal Type</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="snacks">Snacks</option>
+          <option value="dinner">Dinner</option>
+        </Form.Select>
       </div>
-      <div>
-        <Button variant="primary" onClick={saveSelectedItemsToDatabase}>Save to Database</Button>
-      </div>
+
+      <Form.Control
+        type="text"
+        placeholder="Search food items..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{ marginBottom: '20px' }}
+      />
+
+      {selectedItems.length > 0 && (
+        <div style={{ marginBottom: '20px' }}>
+          <h2>Meal Type: {mealType || 'Not Selected'}</h2>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Food Name</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {selectedItems.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.quantity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      )}
+
+      <Container>
+        <Row>
+          {filteredItems.map((item, index) => (
+            <Col md={4} key={index}>
+              <Card
+                style={{
+                  cursor: 'pointer',
+                  border: selectedItems.find((i) => i.name === item.name)
+                    ? '2px solid green'
+                    : '',
+                }}
+              >
+                <Card.Img variant="top" src={item.image_url} />
+                <Card.Body>
+                  <Form.Check
+                    type="checkbox"
+                    checked={!!selectedItems.find((i) => i.name === item.name)}
+                    onChange={() => handleCheckboxToggle(item)}
+                    label={item.name}
+                  />
+                  {selectedItems.find((i) => i.name === item.name) && (
+                    <>
+                      <Button variant="primary" onClick={() => handleDecrement(item.name)}>
+                        -
+                      </Button>
+                      <span> {selectedItems.find((i) => i.name === item.name)?.quantity || 0} </span>
+                      <Button variant="primary" onClick={() => handleIncrement(item.name)}>
+                        +
+                      </Button>
+                    </>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+
+      {selectedItems.length > 0 && (
+        <div>
+          <Button variant="success" onClick={handleClickCalories}>
+            Calculate Calories
+          </Button>
+          <h3>Total Calories: {totalCalories}</h3>
+        </div>
+      )}
+
+      <Button variant="primary" onClick={saveMealData}>
+        Save Meal Data
+      </Button>
     </div>
   );
 };
