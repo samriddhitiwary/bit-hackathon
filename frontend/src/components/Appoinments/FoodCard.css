@@ -1,39 +1,38 @@
 /* FoodCard.css */
 .card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    width: 100px;
-    text-align: center;
-  }
-  
-  .card img {
-    width: 70%; /* Adjust to fit within the card */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 150px; /* Set a max-width for the image */
-    margin-bottom: 10px;
-  }
-  
-  .card h3 {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-  
-  .card p {
-    font-size: 1em;
-    margin-bottom: 10px;
-  }
-  
-  .card div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-  }
-  
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  width: 100px;
+  text-align: center;
+}
+
+.card img {
+  width: 100px; /* Set fixed width */
+  height: 100px; /* Set fixed height */
+  object-fit: cover; /* Ensure the image scales properly and doesn't get distorted */
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.card div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
