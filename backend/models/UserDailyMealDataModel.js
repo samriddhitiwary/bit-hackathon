@@ -28,6 +28,7 @@ const UserDailyMealSchema = new mongoose.Schema({
     enum: ["breakfast", "lunch", "snack", "dinner"],
   },
   meals: [MealItemSchema],
+  calorie: Number,
 });
 
 export default mongoose.model("UserDailyMealData", UserDailyMealSchema);

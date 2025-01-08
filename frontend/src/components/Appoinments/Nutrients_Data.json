@@ -87,17 +87,7 @@
       "sugar_g": 0.01,
       "image_url": "https://as1.ftcdn.net/v2/jpg/03/35/94/82/1000_F_335948277_DYZlCZBTboudqt2t271xB2RT5ES1HZnL.jpg"
   },
-  {
-      "name": "Idli",
-      "calories": 0.78,
-      "serving_size": "1 piece",
-      "fat_total_g": 0.01,
-      "protein_g": 0.03,
-      "carbohydrates_total_g": 0.15,
-      "fiber_g": 0.02,
-      "sugar_g": 0.01,
-      "image_url": "https://as1.ftcdn.net/v2/jpg/06/94/20/02/1000_F_694200265_8TOZ6eCn3VLiCLrRhmpETDYuX7zFvBgg.jpg"
-  },
+  
   {
       "name": "Palak Paneer",
       "calories": 1.25,
@@ -153,17 +143,7 @@
       "sugar_g": 0.02,
       "image_url": "https://as2.ftcdn.net/v2/jpg/09/98/87/83/1000_F_998878381_b51iywJvBxtfE8vsOGZlPFS6pYk17yaD.jpg"
   },
-  {
-      "name": "Dhokla",
-      "calories": 1.7,
-      "serving_size": "1 piece",
-      "fat_total_g": 0.04,
-      "protein_g": 0.07,
-      "carbohydrates_total_g": 0.27,
-      "fiber_g": 0.02,
-      "sugar_g": 0.01,
-      "image_url": "https://as1.ftcdn.net/v2/jpg/06/99/07/34/1000_F_699073475_07ofpreSGzfXrrtlCXruqQDaJfzOZnaM.jpg"
-  },
+
   {
       "name": "Chole Tikka",
       "calories": 2.2,

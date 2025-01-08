@@ -15,34 +15,8 @@ import NutrientsData from "./Nutrients_Data.json";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../Header/Header";
+import Nutrienets_MiniNavbar from "./Nutrienets_MiniNavbar";
 
-const images = [
-  "/images/Nutrients/img1.jpg",
-  "/images/Nutrients/img2.jpg",
-  "/images/Nutrients/img3.jpg",
-  "/images/Nutrients/img4.jpg",
-  "/images/Nutrients/img5.jpg",
-  "/images/Nutrients/img6.jpg",
-  "/images/Nutrients/img7.jpg",
-  "/images/Nutrients/img8.jpg",
-  "/images/Nutrients/img9.jpg",
-  "/images/Nutrients/img10.jpg",
-  "/images/Nutrients/img11.jpg",
-  "/images/Nutrients/img12.jpg",
-  "/images/Nutrients/img13.jpg",
-  "/images/Nutrients/img14.jpg",
-  "/images/Nutrients/img15.jpg",
-  "/images/Nutrients/img16.jpg",
-  "/images/Nutrients/img17.jpg",
-  "/images/Nutrients/img18.jpg",
-  "/images/Nutrients/img20.jpg",
-  "/images/Nutrients/img21.jpg",
-  "/images/Nutrients/img22.jpg",
-  "/images/Nutrients/img23.jpg",
-  "/images/Nutrients/img24.jpg",
-  "/images/Nutrients/img25.jpg",
-  "/images/Nutrients/img26.jpg",
-];
 
 const NutrientsValue = () => {
   const [selectedItems, setSelectedItems] = useState([]);
@@ -90,12 +64,22 @@ const NutrientsValue = () => {
 
   const saveMealData = async () => {
     const patientId = JSON.parse(sessionStorage.getItem("userdata"))?._id;
-
+  
     if (!patientId) {
       toast.error("Patient ID not found. Please log in.");
       return;
     }
-
+  
+    if (!mealType) {
+      toast.error("Please select a meal type.");
+      return;
+    }
+  
+    if (selectedItems.length === 0) {
+      toast.error("Please select at least one food item.");
+      return;
+    }
+  
     const payload = {
       patientId: patientId,
       date: selectedDate,
@@ -104,8 +88,9 @@ const NutrientsValue = () => {
         item: item.name,
         quantity: item.quantity,
       })),
+      calorie: totalCalories, // Include total calories
     };
-
+  
     try {
       const response = await fetch(
         "http://localhost:8000/api/nutrients/meal-data",
@@ -117,7 +102,7 @@ const NutrientsValue = () => {
           body: JSON.stringify(payload),
         }
       );
-
+  
       const result = await response.json();
       if (response.ok) {
         toast.success("Meal data stored successfully!");
@@ -129,10 +114,13 @@ const NutrientsValue = () => {
       toast.error("An error occurred while saving meal data.");
     }
   };
+  
 
   return (
     <>
       <Header />
+      <br/><br/>
+      <Nutrienets_MiniNavbar/>
       <div style={{ padding: "20px", backgroundColor: "#f8f9fa" }}>
         <h1
           className="text-center mb-4"
@@ -182,7 +170,7 @@ const NutrientsValue = () => {
             style={{
               maxWidth: "500px",
               borderRadius: "20px",
-              flex: "1 1 500px", // Ensures it adjusts based on screen size
+              flex: "1 1 500px", 
             }}
           />
         </div>
