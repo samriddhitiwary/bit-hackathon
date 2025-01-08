@@ -9,18 +9,23 @@
   border: 1px solid #ddd;
   padding: 20px;
   width: 200px;
-  height: 300px;
   text-align: center;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease; /* Smooth animation */
+  flex-grow: 1;
+  flex-basis: 200px;
+  min-height: 300px;
+  position: relative;
+  perspective: 1000px; 
 }
 
 .card:hover {
-  transform: translateY(-10px); /* Lift effect on hover */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+  transform: translateY(-10px) rotateY(10deg) scale(1.05); 
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
+  filter: brightness(1.1); 
 }
 
 .card img {
@@ -53,7 +58,7 @@ button:hover {
 }
 
 button:active {
-  transform: scale(0.98); /* Slight button press effect */
+  transform: scale(0.98);
 }
 
 button svg {

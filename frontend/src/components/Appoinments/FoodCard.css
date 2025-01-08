@@ -8,9 +8,9 @@
 }
 
 .card img {
-  width: 100px; /* Set fixed width */
-  height: 100px; /* Set fixed height */
-  object-fit: cover; /* Ensure the image scales properly and doesn't get distorted */
+  width: 100px; 
+  height: 100px;
+  object-fit: cover; 
   margin-bottom: 10px;
 }
 

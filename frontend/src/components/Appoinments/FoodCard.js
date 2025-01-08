@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './FoodCard.css';  // Import the external CSS file
+import './FoodCard.css';  
 
 const FoodCard = ({ food, onSelect, onUpdateQuantity }) => {
   const [quantity, setQuantity] = useState(1);
