@@ -8,7 +8,7 @@ import {
   Table,
   Container,
 } from "react-bootstrap";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa"; 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import NutrientsData from "./Nutrients_Data.json";
@@ -18,7 +18,7 @@ import Header from "../Header/Header";
 import Nutrienets_MiniNavbar from "./Nutrienets_MiniNavbar";
 
 
-const NutrientsValue = () => {
+const Nutrients_Value = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -88,7 +88,7 @@ const NutrientsValue = () => {
         item: item.name,
         quantity: item.quantity,
       })),
-      calorie: totalCalories, // Include total calories
+      calorie: totalCalories, 
     };
   
     try {
@@ -108,6 +108,7 @@ const NutrientsValue = () => {
         toast.success("Meal data stored successfully!");
       } else {
         toast.error(`Error: ${result.message || "Failed to save meal data."}`);
+
       }
     } catch (error) {
       console.error("Error saving meal data:", error);
@@ -228,9 +229,9 @@ const NutrientsValue = () => {
         </div>
 
         <Container>
-          <Row className="food-container">
+          <Row>
             {filteredItems.map((item, index) => (
-              <Col md={4} key={index}>
+              <Col md={4} key={index} style={{marginBottom: "25px"}}>
                 <Card
                   style={{
                     cursor: "pointer",
@@ -239,12 +240,14 @@ const NutrientsValue = () => {
                       : "none",
                     transition:
                       "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                    // margin: "10px"
                   }}
                   className="card shadow-lg rounded"
                 >
-                  <Card.Img variant="top" src={item.image_url} />
-                  <Card.Body>
+                  <Card.Img style={{height : "250px"}} variant="top" src={item.image_url} />
+                  <Card.Body style={{display: "flex", flexWrap: "wrap"}}>
                     <Form.Check
+                    style={{height: "55px"}}
                       type="checkbox"
                       checked={
                         !!selectedItems.find((i) => i.name === item.name)
@@ -254,7 +257,7 @@ const NutrientsValue = () => {
                       className="fs-5"
                     />
                     {selectedItems.find((i) => i.name === item.name) && (
-                      <>
+                      <div style={{alignSelf: "flex-end"}}>
                         <Button
                           variant="outline-danger"
                           onClick={() => handleDecrement(item.name)}
@@ -273,7 +276,7 @@ const NutrientsValue = () => {
                         >
                           <FaPlus />
                         </Button>
-                      </>
+                      </div>
                     )}
                   </Card.Body>
                 </Card>
@@ -288,4 +291,4 @@ const NutrientsValue = () => {
   );
 };
 
-export default NutrientsValue;
+export default Nutrients_Value;

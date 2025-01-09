@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
+import nutrientsData from "./Nutrients_Data.json";
+import Header from "../Header/Header";
+import Nutrienets_MiniNavbar from "./Nutrienets_MiniNavbar";
+import "./View_Calories.css";
 
-const ViewCalories = () => {
+const View_Calories = () => {
   const [meals, setMeals] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
   const [chartData, setChartData] = useState(null);
@@ -24,19 +28,43 @@ const ViewCalories = () => {
         return;
       }
 
-      // Calculate total calories
-      const total = data.reduce((sum, meal) => sum + meal.calories, 0);
+      const mealsTypeVsCalories = new Map();
 
-      // Prepare data for chart
+      const getCalories = (mealType) => {
+        let total = 0;
+        mealType.meals.map((meal) => {
+          let calories = 0;
+          nutrientsData.map((nutrientData) => {
+            if (nutrientData.name === meal.item) {
+              calories = nutrientData.calories;
+            }
+          });
+          total += calories * meal.quantity;
+        });
+        return total;
+      };
+
+      data.map((mealsType) => {
+        mealsTypeVsCalories.set(mealsType.mealtype, getCalories(mealsType));
+      });
+      let total = 0;
+      let labels = [];
+      let chartYAxisData = [];
+      mealsTypeVsCalories.forEach((value, key) => {
+        total += value;
+        labels.push(key);
+        chartYAxisData.push(value);
+      });
+
       const chartData = {
-        labels: data.map((meal) => meal.mealType), // e.g., Breakfast, Lunch, etc.
+        labels: labels,
         datasets: [
           {
             label: "Calories",
-            data: data.map((meal) => meal.calories),
-            backgroundColor: data.map((meal) => {
-              if (meal.calories < 500) return "green";
-              if (meal.calories <= 700) return "yellow";
+            data: chartYAxisData,
+            backgroundColor: chartYAxisData.map((value) => {
+              if (value < 400) return "green";
+              if (value > 400 && value < 600) return "yellow";
               return "red";
             }),
           },
@@ -56,62 +84,66 @@ const ViewCalories = () => {
   }, [selectedDate]);
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h2 style={{ textAlign: "center" }}>Calorie Tracker</h2>
+    <>
+      <Header />
+      <Nutrienets_MiniNavbar />
+      <div className="calorie-tracker-container">
+        <h2 className="calorie-tracker-title">Calorie Tracker</h2>
 
-      <div style={{ marginBottom: "20px", textAlign: "center" }}>
-        <label htmlFor="date">Select Date: </label>
-        <input
-          id="date"
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          style={{ padding: "5px", borderRadius: "5px" }}
-        />
+        <div className="date-picker-container">
+          <label htmlFor="date">Select Date:</label>
+          <input
+            id="date"
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="date-picker"
+          />
+        </div>
+
+        {meals.length === 0 ? (
+          <p className="no-meals-message">
+            {selectedDate
+              ? "No meals found for the selected date."
+              : "Please select a date to view calorie details."}
+          </p>
+        ) : (
+          <>
+            <div className="meals-summary">
+              <h3>Total Calories: {totalCalories}</h3>
+            </div>
+
+            <div className="calorie-chart">
+              <h3>Calorie Chart</h3>
+              <Bar
+                data={chartData}
+                options={{
+                  plugins: { legend: { display: true } },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      max: 1000,
+                      ticks: { stepSize: 100 },
+                      grid: {
+                        drawBorder: false,
+                        color: (context) => {
+                          if (context.tick.value < 400)
+                            return "rgba(0, 128, 0, 0.2)";
+                          if (context.tick.value < 600)
+                            return "rgba(255, 255, 0, 0.2)";
+                          return "rgba(255, 0, 0, 0.2)";
+                        },
+                      },
+                    },
+                  },
+                }}
+              />
+            </div>
+          </>
+        )}
       </div>
-
-      {meals.length === 0 ? (
-        <p style={{ textAlign: "center" }}>
-          {selectedDate
-            ? "No meals found for the selected date."
-            : "Please select a date to view calorie details."}
-        </p>
-      ) : (
-        <>
-          <div style={{ marginBottom: "20px" }}>
-            <h3>Meals</h3>
-            <ul>
-              {meals.map((meal) => (
-                <li key={meal._id}>
-                  <strong>{meal.mealType}:</strong> {meal.calories} calories
-                </li>
-              ))}
-            </ul>
-            <h3>Total Calories: {totalCalories}</h3>
-          </div>
-
-          <div>
-            <h3>Calorie Chart</h3>
-            <Bar
-              data={chartData}
-              options={{
-                plugins: {
-                  legend: {
-                    display: true,
-                  },
-                },
-                scales: {
-                  y: {
-                    beginAtZero: true,
-                  },
-                },
-              }}
-            />
-          </div>
-        </>
-      )}
-    </div>
+    </>
   );
 };
 
-export default ViewCalories;
+export default View_Calories;
