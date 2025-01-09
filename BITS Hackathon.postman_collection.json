@@ -1,0 +1,656 @@
+{
+	"info": {
+		"_postman_id": "e5cea42c-7931-480f-bfba-e36af2aeec17",
+		"name": "BITS Hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36661185"
+	},
+	"item": [
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Create Doctor Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fname\": \"Dr. Neelam\",\r\n    \"lname\": \"Sharma\",\r\n    \"specialization\": \"Oncologist\",\r\n    \"schedule\": [\r\n      {\r\n        \"days\": [\"Tuesday\", \"Friday\"],\r\n        \"time\": {\r\n          \"startTime\": \"10:00 AM\",\r\n          \"endTime\": \"1:00 PM\"\r\n        }\r\n      },\r\n      {\r\n        \"days\": [\"Wednesday\", \"Saturday\"],\r\n        \"time\": {\r\n          \"startTime\": \"4:00 PM\",\r\n          \"endTime\": \"7:00 PM\"\r\n        }\r\n      }\r\n    ],\r\n    \"Degree\": \"MBBS, MD (Oncology)\",\r\n    \"Location\": \"Lucknow\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/doctor/createDoctorProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"doctor",
+								"createDoctorProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of all Doctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/doctor/getAllDoctors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"doctor",
+								"getAllDoctors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Create Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fname\": \"Samriddhi\",\r\n    \"lname\": \"Tiwary\",\r\n    \"dob\" : \"01/18/2005\",\r\n    \"address\": \"503 Lotus Kumar Suraksha\",\r\n    \"email\": \"samriddhi.tiwary01@gmail.com\",\r\n    \"weight\": 67,\r\n    \"blood_group\": \"A+\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by user ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/getOne/6768d9ef920493bc7019b703",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"getOne",
+								"6768d9ef920493bc7019b703"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/delete/6768d9ef920493bc7019b703",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"6768d9ef920493bc7019b703"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile Updation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fname\": \"Shaurya\",\r\n    \"lname\": \"Tiwary\",\r\n    \"dob\": \"03/17/2011\",\r\n    \"address\": \"Pune\",\r\n    \"age\": \"50\",\r\n    \"weight\": \"70\",\r\n\r\n    \"blood_group\": \"O+\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/update/6768de830c6ace4c3a86004d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"update",
+								"6768de830c6ace4c3a86004d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/getuserbyemail?email=samriddhi.tiwary01@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"getuserbyemail"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "samriddhi.tiwary01@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment",
+			"item": [
+				{
+					"name": "Create Appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\":\"6768ea92a6fd51794462a009\",\r\n    \"doctorId\": \"676a5f37a036d237ccbf67e8\",\r\n    \"date\": \"12/12/2012\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/appointment/scheduleApointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointment",
+								"scheduleApointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update appointment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\":\"6768ea92a6fd51794462a009\",\r\n    \"doctorId\": \"676a5f37a036d237ccbf67e8\",\r\n    \"date\": \"05/05/2005\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/appointment/updateAppointment/676a6b272bd7420e2142aa2a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointment",
+								"updateAppointment",
+								"676a6b272bd7420e2142aa2a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Appointment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/appointment/cancelAppointment/676a7889c8eeb582e02a9f1e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointment",
+								"cancelAppointment",
+								"676a7889c8eeb582e02a9f1e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllAppointmentsOfOnePatient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/appointment/getAllAppointmentsOfOnePatient/6768ea92a6fd51794462a009",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"appointment",
+								"getAllAppointmentsOfOnePatient",
+								"6768ea92a6fd51794462a009"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Records",
+			"item": [
+				{
+					"name": "Blood-Pressure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\": \"6768ea92a6fd51794462a009\",\r\n    \"bloodPressure\": 98.3,\r\n    \"date\": \"2025-12-1\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/healthrecord/getValueforBP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"healthrecord",
+								"getValueforBP"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get latest Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/healthrecord/getAllBPRecordsbyId/6768ea92a6fd51794462a009",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"healthrecord",
+								"getAllBPRecordsbyId",
+								"6768ea92a6fd51794462a009"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPDF",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/samri/Downloads/activity1.pdf"
+								},
+								{
+									"key": "patientId",
+									"value": "6768ea92a6fd51794462a009",
+									"type": "text"
+								},
+								{
+									"key": "hospitalName",
+									"value": "My Hospital Name",
+									"type": "text"
+								},
+								{
+									"key": "doctorName",
+									"value": "My Doctor",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-12-14",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/pdfdetails/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pdfdetails",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPDFbyId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/samri/Downloads/ACTIVITY-1.pdf"
+								},
+								{
+									"key": "patientId",
+									"value": "6768ea92a6fd51794462a009",
+									"type": "text"
+								},
+								{
+									"key": "hospitalName",
+									"value": "My Hospital Name",
+									"type": "text"
+								},
+								{
+									"key": "doctorName",
+									"value": "My Doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/pdfdetails/getById/676ece131e68a063fe6c15f9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pdfdetails",
+								"getById",
+								"676ece131e68a063fe6c15f9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPDFbyPatientId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/samri/Downloads/ACTIVITY-1.pdf"
+								},
+								{
+									"key": "patientId",
+									"value": "6768ea92a6fd51794462a009",
+									"type": "text"
+								},
+								{
+									"key": "hospitalName",
+									"value": "My Hospital Name",
+									"type": "text"
+								},
+								{
+									"key": "doctorName",
+									"value": "My Doctor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/pdfdetails/getPDFsByPatientId/6768ea92a6fd51794462a009",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pdfdetails",
+								"getPDFsByPatientId",
+								"6768ea92a6fd51794462a009"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutrients",
+			"item": [
+				{
+					"name": "To Insert meals",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"patientId\": \"6768ea92a6fd51794462a009\",\r\n \"date\": \"2025-01-15T00:00:00.000+00:00\",\r\n  \"mealtype\": \"dinner\",\r\n  \"meals\": [\r\n    {\r\n      \"item\": \"Roti\",\r\n      \"quantity\": 4\r\n    },\r\n   \r\n    {\r\n      \"item\": \"Daal\",\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/nutrients/meal-data",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"nutrients",
+								"meal-data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all meals",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/Nutrients/get-all-meals/6768ea92a6fd51794462a009/2025-01-15T00:00:00.000+00:00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Nutrients",
+								"get-all-meals",
+								"6768ea92a6fd51794462a009",
+								"2025-01-15T00:00:00.000+00:00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete meal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/nutrients/delete-meal/677d599134d4eb213c3dc81e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"nutrients",
+								"delete-meal",
+								"677d599134d4eb213c3dc81e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Meals",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"date\": \"2025-01-15T00:00:00.000+00:00\",\r\n  \"mealtype\": \"lunch\",\r\n  \"meals\": [\r\n    {\r\n      \"item\": \"Samosa\",\r\n      \"quantity\": 1000\r\n    }\r\n    \r\n  ]\r\n \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/nutrients/update-meal/677d5c1cb335ef6ee29ee75e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"nutrients",
+								"update-meal",
+								"677d5c1cb335ef6ee29ee75e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
